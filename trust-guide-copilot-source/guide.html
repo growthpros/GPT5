@@ -184,9 +184,9 @@
     <tr><td><b>2 Training</b></td><td>Under enterprise data protection, Microsoft says prompts, responses and the data Copilot reads aren't used to train its foundation models.</td></tr>
     <tr><td><b>3 Retention</b></td><td>Purview retention policies can cover Copilot prompts and responses, but they aren't retroactive, so set them before rollout. Files uploaded to Copilot Chat are saved in the person's OneDrive. Copilot's memory feature isn't covered by standard holds.</td></tr>
     <tr><td><b>4 Contract</b></td><td>Copilot runs under Microsoft's Product Terms and Data Protection Addendum. I flag questions about them and route them to legal; I don't interpret contracts.</td></tr>
-    <tr><td><b>5 Vendor chain</b></td><td><b>Web search:</b> Copilot can send search queries to Bing. Admins can turn this off with a policy.<br><b>Other AI providers:</b> some Copilot features can use Anthropic's models, with Anthropic as a Microsoft subprocessor. An admin setting controls this, and the default has varied by tenant and region.<br><b>Agents and connectors:</b> each one is another path for data.</td></tr>
+    <tr><td><b>5 Vendor chain</b></td><td><b>Web search:</b> Copilot can send search queries to Bing. Admins can turn this off with a policy.<br><b>Model choice:</b> when an admin allows it, people can choose Claude, Anthropic's model, for an answer in Microsoft 365 Copilot. Anthropic then processes that request as a Microsoft subprocessor. The admin setting decides whether the choice exists; each person decides when to use it. As of November 2026, Claude in Copilot runs outside Microsoft's EU Data Boundary, which matters for UK and EU clients.<br><b>Agents and connectors:</b> each one is another path for data.</td></tr>
   </table>
-  <div class="callout gold"><b class="k">Worth saying out loud</b><p>Never assume "enterprise Copilot" means every control you want is switched on. Web search and other model providers are tenant settings, and someone has to look at them.</p></div>
+  <div class="callout gold"><b class="k">Worth saying out loud</b><p>Never assume "enterprise Copilot" means every control you want is switched on. Web search and model choice are tenant settings, and someone has to decide how to set them.</p></div>
   <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>6</span></div>
 </section>
 
@@ -323,7 +323,7 @@
     <tr><th style="width:20%">Question</th><th>The answer</th></tr>
     <tr><td><b>Owner</b></td><td>The VP of Human Resources, with a review date after the first cycle</td></tr>
     <tr><td><b>Data</b></td><td>One person's ratings and comments from the Forms export. Confidential. Summaries get the Confidential label.</td></tr>
-    <tr><td><b>Environment</b></td><td>Licensed Microsoft 365 Copilot with a work account. Web search off for this task. Compliance has reviewed the AI provider settings.</td></tr>
+    <tr><td><b>Environment</b></td><td>Licensed Microsoft 365 Copilot with a work account. Web search off for this task. Compliance has decided whether people may choose Claude for it.</td></tr>
     <tr><td><b>Access</b></td><td>Exports and summaries live in a private HR site, set up before any files move. Managers see only their own people's summaries.</td></tr>
     <tr><td><b>Action</b></td><td>Level 2. Copilot drafts the summary and Excel does the math. A person reviews it, saves it and shares it. Later, an Agent Builder agent can run the same steps, still at level 2.</td></tr>
     <tr><td><b>Oversight</b></td><td>HR reads every summary before a manager sees it. Ratings, pay and promotion decisions stay with people. Groups smaller than three are left out to protect anonymity.</td></tr>
@@ -346,7 +346,7 @@
     <tr><td>1</td><td><b>Who has the admin roles</b></td><td>Who is our AI Administrator and Global Administrator?</td></tr>
     <tr><td>2</td><td><b>Copilot licenses</b></td><td>Who has a Microsoft 365 Copilot license, and who only has Copilot Chat?</td></tr>
     <tr><td>3</td><td><b>Web search</b></td><td>Is web search on in Copilot, and for whom?</td></tr>
-    <tr><td>4</td><td><b>AI providers operating as Microsoft subprocessors</b></td><td>Are Anthropic models on in our tenant? Has compliance reviewed that?</td></tr>
+    <tr><td>4</td><td><b>AI providers operating as Microsoft subprocessors</b></td><td>Can our people choose Claude in Copilot? Has compliance said which data they can use it with?</td></tr>
     <tr><td>5</td><td><b>Cowork and usage-based billing</b></td><td>Is Cowork on? If so, for whom, with what spending limits, and is browser use off?</td></tr>
     <tr><td>6</td><td><b>Agents</b></td><td>Who can build and share agents? Who reviews the agent inventory?</td></tr>
     <tr><td>7</td><td><b>Oversharing reports</b></td><td>Have we run the data access governance reports in SharePoint?</td></tr>
@@ -371,6 +371,7 @@
   <p><b>Microsoft Purview protections for Copilot</b><br><a href="https://learn.microsoft.com/en-us/purview/ai-microsoft-purview">learn.microsoft.com/en-us/purview/ai-microsoft-purview</a></p>
   <p><b>Manage public web access in Copilot</b><br><a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/manage-public-web-access">learn.microsoft.com/en-us/copilot/microsoft-365/manage-public-web-access</a></p>
   <p><b>Copilot in Microsoft 365 apps with Anthropic models</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-anthropic-apps">learn.microsoft.com/en-us/microsoft-365/copilot/copilot-anthropic-apps</a></p>
+  <p><b>"M365 Copilot adds choice and risk with Anthropic's Claude," Directions on Microsoft, updated June 12, 2026</b><br><a href="https://www.directionsonmicrosoft.com/reports/m365-copilot-adds-choice-and-risk-with-anthropics-claude">directionsonmicrosoft.com/reports/m365-copilot-adds-choice-and-risk-with-anthropics-claude</a></p>
   <p><b>Copilot Cowork admin and governance</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-admin-governance">learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-admin-governance</a></p>
   <p><b>Governance and lifecycle actions for agents in the Microsoft 365 admin center</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/admin/manage/agent-actions">learn.microsoft.com/en-us/microsoft-365/admin/manage/agent-actions</a></p>
   <p><b>Cost considerations for Copilot agents</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/cost-considerations">learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/cost-considerations</a></p>
