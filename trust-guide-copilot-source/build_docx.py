@@ -183,8 +183,11 @@ def table(tb):
     d.add_paragraph().paragraph_format.space_after = Pt(2)
 
 def qlist(qs):
-    t = d.add_table(rows=len(qs), cols=3); borders(t, inside=LINE); cell_margins(t, 70, 90)
-    widths = (Inches(0.45), Inches(3.2), Inches(3.25))
+    has_ms = qs[0].find('div', class_='ms') is not None
+    t = d.add_table(rows=len(qs), cols=3 if has_ms else 2); borders(t, inside=LINE); cell_margins(t, 50 if not has_ms else 70, 90)
+    widths = (Inches(0.45), Inches(3.2), Inches(3.25)) if has_ms else (Inches(0.45), Inches(6.45))
+    lay = OxmlElement('w:tblLayout'); lay.set(qn('w:type'), 'fixed'); t._tbl.tblPr.append(lay)
+    for gc, w in zip(t._tbl.tblGrid.findall(qn('w:gridCol')), widths): gc.set(qn('w:w'), str(int(w.inches * 1440)))
     for i, q in enumerate(qs):
         keep_row(t.rows[i])
         for j, w in enumerate(widths): t.rows[i].cells[j].width = w
@@ -194,8 +197,9 @@ def qlist(qs):
         p = first_par(t.rows[i].cells[1]); r = p.add_run(b.get_text()); r.bold = True; r.font.size = Pt(10); r.font.color.rgb = rgb(NAVY)
         p2 = t.rows[i].cells[1].add_paragraph(); r = p2.add_run(s.get_text()); r.font.size = Pt(8.6); r.font.color.rgb = rgb(TEXT2)
         ms = q.find('div', class_='ms')
-        p = first_par(t.rows[i].cells[2]); p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
-        r = p.add_run(ms.get_text()); r.bold = True; r.font.size = Pt(8.4); r.font.color.rgb = rgb(TEAL)
+        if ms:
+            p = first_par(t.rows[i].cells[2]); p.alignment = WD_ALIGN_PARAGRAPH.RIGHT
+            r = p.add_run(ms.get_text()); r.bold = True; r.font.size = Pt(8.4); r.font.color.rgb = rgb(TEAL)
     d.add_paragraph().paragraph_format.space_after = Pt(2)
 
 def render(node):
@@ -206,7 +210,8 @@ def render(node):
         if 'foot' in cls: pass
         elif k.name == 'img':
             first = k.find_parent('section') is pages[0]
-            p = para(after=10 if first else 2); p.add_run().add_picture(LOGO, width=Inches(0.75 if first else 0.45))
+            w = 0.45 if 'width:0.6in' in k.get('style','') else (0.75 if first else 0.45)
+            p = para(after=10 if first else 2); p.add_run().add_picture(LOGO, width=Inches(w))
         elif k.name == 'p' and 'eyebrow' in cls:
             para(text=k.get_text().upper(), size=8, color=CORAL, bold=True, after=4)
         elif k.name == 'h1':
@@ -275,6 +280,6 @@ for tag, txt in (('begin', None), (None, 'PAGE'), ('end', None)):
     else:
         it = OxmlElement('w:instrText'); it.set(qn('xml:space'), 'preserve'); it.text = txt; r._r.append(it)
 sec.different_first_page_header_footer = True
-d.core_properties.title = 'AI Trust Boundary Framework: Microsoft 365 Copilot Edition'
+d.core_properties.title = soup.title.get_text() if soup.title else 'Growth Partner Pros'
 d.core_properties.author = 'Caroline Hinton, Growth Partner Pros'
 d.save(OUT); print('saved')
