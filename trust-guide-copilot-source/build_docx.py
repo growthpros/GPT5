@@ -164,6 +164,21 @@ def table(tb):
     t = d.add_table(rows=len(rows), cols=ncol); borders(t, inside=LINE); cell_margins(t, 60, 100)
     t.alignment = WD_TABLE_ALIGNMENT.LEFT
     small = 'grid' in tb.get('class', []) or 'ladder' in tb.get('class', [])
+    ths = rows[0].find_all('th')
+    pcts = []
+    for th in ths:
+        m = re.search(r'width:(\d+)%', th.get('style', ''))
+        pcts.append(float(m.group(1)) if m else None)
+    if ths and 'check' not in tb.get('class', []) and any(pcts):
+        known = sum(x for x in pcts if x); unknown = [x for x in pcts if not x]
+        rest = (100 - known) / len(unknown) if unknown else 0
+        pcts = [x if x else rest for x in pcts]
+        widths = [6.9 * x / 100 for x in pcts]
+        lay = OxmlElement('w:tblLayout'); lay.set(qn('w:type'), 'fixed'); t._tbl.tblPr.append(lay)
+        for gc, w in zip(t._tbl.tblGrid.findall(qn('w:gridCol')), widths): gc.set(qn('w:w'), str(int(w * 1440)))
+        for r in t.rows:
+            for ci, w in enumerate(widths):
+                if ci < len(r.cells): r.cells[ci].width = Inches(w)
     if 'check' in tb.get('class', []):
         for ri in range(len(rows)):
             for ci, w in enumerate((0.35, 2.6, 3.95)): t.rows[ri].cells[ci].width = Inches(w)
@@ -266,9 +281,12 @@ def render(node):
 
 pages = soup.find_all('section', class_='page')
 for n, pg in enumerate(pages):
-    if n:
-        d.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
+    before = len(d.element.body)
     render(pg)
+    if n:
+        for el in list(d.element.body)[before:]:
+            if el.tag == qn('w:p'):
+                pPr = el.get_or_add_pPr(); x = OxmlElement('w:pageBreakBefore'); pPr.insert(0, x); break
 
 # footer with page number
 fp = sec.footer.paragraphs[0]
