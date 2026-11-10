@@ -220,10 +220,16 @@ def render(node):
                 para(text=k.get_text(), size=16, color=TEAL, bold=True, after=10)
             elif 'color:var(--coral)' in style:
                 para(node=k, size=12, color=CORAL, bold=True, after=8)
+            elif 'srcline' in cls:
+                para(node=k, size=7.5, color=MUTED, before=6, after=0)
             elif 'small' in cls:
                 para(node=k, size=8, color=MUTED, after=6)
             elif 'lead' in cls:
                 para(node=k, size=10, after=8)
+            elif any(c in cls for c in ()) :
+                pass
+            elif k.find_parent('section') is not None and 'src2' in k.find_parent('section').get('class', []) and k.find('a'):
+                para(node=k, size=8, after=4)
             elif 'color:var(--teal)' in style:
                 para(node=k, size=9, color=TEAL, after=0)
             elif 'font-weight:700' in style:
