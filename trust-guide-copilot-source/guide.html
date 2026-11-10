@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AI Trust Boundary Framework: Microsoft 365 Copilot Edition</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @page { size: 8.5in 11in; margin: 0; }
+  :root{
+    --navy:#0A2044; --coral:#BA4D45; --teal:#0D7C7D; --orange:#AB5836;
+    --text2:#374151; --muted:#4B5563; --line:#E5E7EB;
+    --t-teal:#F0FAF9; --t-coral:#FFF5F4; --t-gold:#FFFBF0; --t-gray:#F5F7FB;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#fff}
+  body{font-family:'Montserrat',sans-serif;color:var(--navy);font-size:10pt;line-height:1.45}
+  .page{width:8.5in;height:11in;padding:0.75in 0.8in 0.7in;position:relative;page-break-after:always;overflow:hidden}
+  .page:last-child{page-break-after:auto}
+  .foot{position:absolute;left:0.8in;right:0.8in;bottom:0.4in;display:flex;justify-content:space-between;font-size:7.5pt;color:var(--muted)}
+  .eyebrow{font-size:8pt;font-weight:700;letter-spacing:.12em;color:var(--coral);text-transform:uppercase;margin:0 0 6pt}
+  h1{font-size:25pt;line-height:1.12;font-weight:800;margin:0 0 10pt}
+  h2{font-size:11.5pt;font-weight:700;color:var(--coral);margin:16pt 0 7pt}
+  p{margin:0 0 8pt;color:var(--text2)}
+  .lead{font-size:10.5pt;color:var(--text2);margin-bottom:12pt}
+  .callout{border-left:3pt solid var(--teal);background:var(--t-teal);padding:9pt 12pt;margin:10pt 0}
+  .callout.coral{border-color:var(--coral);background:var(--t-coral)}
+  .callout.gold{border-color:var(--orange);background:var(--t-gold)}
+  .callout.gray{border-color:var(--navy);background:var(--t-gray)}
+  .callout b.k{display:block;font-size:9pt;color:var(--navy);margin-bottom:2pt}
+  .callout p{margin:0;font-size:9pt}
+  table{width:100%;border-collapse:collapse;font-size:8.6pt}
+  th{background:var(--navy);color:#fff;text-align:left;font-weight:600;padding:5pt 7pt;font-size:8pt}
+  td{padding:6pt 7pt;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text2)}
+  td b{color:var(--navy)}
+  .num{display:inline-flex;width:18pt;height:18pt;border-radius:50%;border:1.5pt solid var(--coral);color:var(--coral);font-weight:700;font-size:8.5pt;align-items:center;justify-content:center;flex:none}
+  .row{display:flex;gap:10pt}
+  .card{flex:1;background:var(--t-gray);border-left:3pt solid var(--navy);padding:8pt 10pt;font-size:8.6pt;color:var(--text2)}
+  .card h4{margin:0 0 3pt;font-size:9pt;color:var(--navy)}
+  .card.teal{background:var(--t-teal);border-color:var(--teal)}
+  .card.coral{background:var(--t-coral);border-color:var(--coral)}
+  .card.gold{background:var(--t-gold);border-color:var(--orange)}
+  .tag{display:inline-block;font-size:7pt;font-weight:700;letter-spacing:.08em;padding:1.5pt 5pt;border-radius:2pt;color:#fff}
+  .g{background:var(--teal)} .y{background:var(--orange)} .r{background:var(--coral)}
+  ul{margin:0 0 8pt;padding-left:14pt;color:var(--text2)} li{margin-bottom:3pt}
+  .q{display:flex;gap:10pt;align-items:flex-start;padding:7pt 0;border-bottom:1px solid var(--line)}
+  .q b{display:block;font-size:10pt}
+  .q span{font-size:8.8pt;color:var(--text2)}
+  .q .ms{margin-left:auto;width:2.6in;font-size:8.3pt;color:var(--teal);font-weight:600;text-align:right}
+  .chips{display:flex;gap:6pt;margin-top:14pt}
+  .chips div{flex:1;border-top:2pt solid var(--coral);background:var(--t-gray);padding:6pt 6pt;font-size:7.6pt;font-weight:600}
+  .chips div b{display:block;font-size:12pt;color:var(--coral)}
+  .ladder td{font-size:8.2pt;padding:4pt 7pt}
+  .small{font-size:8pt;color:var(--muted)}
+  .grid td{font-size:7.8pt;text-align:left}
+  .grid td.h{font-weight:700;color:var(--navy);background:var(--t-gray)}
+  .src p{font-size:8.6pt;margin-bottom:7pt}
+  .src a{color:var(--teal);text-decoration:none}
+  .check td:first-child{width:22pt;font-weight:700;color:var(--coral)}
+</style>
+</head>
+<body>
+
+<!-- 1 COVER -->
+<section class="page">
+  <img src="gpp-logo.svg" style="width:0.75in;height:0.75in;margin-bottom:1.4in" alt="Growth Partner Pros logo">
+  <p class="eyebrow">A practical guide from Growth Partner Pros</p>
+  <h1 style="font-size:34pt">AI Trust Boundary Framework</h1>
+  <p style="font-size:17pt;font-weight:700;color:var(--teal);margin:0 0 14pt">Microsoft 365 Copilot Edition</p>
+  <p style="font-size:12pt;color:var(--coral);font-weight:600;line-height:1.35">Where do we trust Copilot, where do we constrain it,<br>and where does human accountability begin?</p>
+  <p>The same six questions as the original framework, with the Microsoft 365 setting, report or decision that answers each one.</p>
+  <div class="chips">
+    <div><b>1</b>Owner</div><div><b>2</b>Data</div><div><b>3</b>Environment</div><div><b>4</b>Access</div><div><b>5</b>Action</div><div><b>6</b>Oversight</div>
+  </div>
+  <div style="position:absolute;bottom:1in;left:0.8in">
+    <p style="margin:0;font-weight:700;color:var(--navy)">Caroline Hinton</p>
+    <p style="margin:0;font-size:9pt">Founder, Growth Partner Pros</p>
+    <p style="margin:0;font-size:9pt;color:var(--teal)">caroline.hinton@growthpartnerpros.com</p>
+  </div>
+</section>
+
+<!-- 2 CORE IDEA -->
+<section class="page">
+  <p class="eyebrow">What changes with Copilot</p>
+  <h1>Copilot uses the access<br>you already gave people</h1>
+  <p class="lead">Most AI tools only know what you paste into them. Microsoft 365 Copilot is different. It works inside your email, Teams chats, meetings, OneDrive and SharePoint, and it can draw on anything the person using it is allowed to open.</p>
+  <div class="callout coral"><b class="k">The one sentence to remember</b><p>Copilot doesn't create new access. It finds and uses the access people already have, including access nobody meant to give them. Microsoft's own SharePoint guidance says Copilot can surface broadly shared files a user didn't know they could see.</p></div>
+  <h2>The six questions, and where each one lives in Microsoft 365</h2>
+  <div class="q"><span class="num">1</span><div><b>Owner</b><span>Who owns the outcome?</span></div><div class="ms">A named business owner, plus the Agents page in the Microsoft 365 admin center</div></div>
+  <div class="q"><span class="num">2</span><div><b>Data</b><span>What does Copilot actually need to know?</span></div><div class="ms">Sensitivity labels in Microsoft Purview</div></div>
+  <div class="q"><span class="num">3</span><div><b>Environment</b><span>Where is it processed, and who else touches it?</span></div><div class="ms">Work account sign-in, enterprise data protection, web search and AI provider settings</div></div>
+  <div class="q"><span class="num">4</span><div><b>Access</b><span>What can Copilot reach?</span></div><div class="ms">SharePoint and Teams permissions, SharePoint Advanced Management</div></div>
+  <div class="q"><span class="num">5</span><div><b>Action</b><span>What can Copilot change?</span></div><div class="ms">Which Copilot you use: Chat, Agent Builder, Copilot Studio or Cowork</div></div>
+  <div class="q"><span class="num">6</span><div><b>Oversight</b><span>Where must a human decide, and how do we check what comes out?</span></div><div class="ms">Human approval points, plus Purview audit and retention</div></div>
+  <div class="callout"><b class="k">Why the owner still comes first</b><p>Microsoft gives you the switches. Someone with a name and a title still has to decide how to set them.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>2</span></div>
+</section>
+
+<!-- 3 FINANCE MIRROR -->
+<section class="page">
+  <p class="eyebrow">Why it feels familiar</p>
+  <h1>You already run these<br>controls for money</h1>
+  <p class="lead">Each question has a twin in finance, and Microsoft 365 has a setting that does the same job for Copilot.</p>
+  <table>
+    <tr><th style="width:22%">The AI question</th><th style="width:36%">The finance control it mirrors</th><th>The Microsoft 365 control</th></tr>
+    <tr><td><b>1 Owner</b></td><td><b>Budget owner.</b> One named person answers for the line item.</td><td>A named owner for each Copilot use and each agent. Admins can see, block and unblock agents from the admin center.</td></tr>
+    <tr><td><b>2 Data</b></td><td><b>Need to know.</b> Payroll files don't go to everyone.</td><td>Sensitivity labels mark files as Confidential or Highly Confidential, and Copilot respects them.</td></tr>
+    <tr><td><b>3 Environment</b></td><td><b>Approved vendors.</b> You vet a bank before you deposit with it.</td><td>Work accounts only, enterprise data protection, and admin settings for web search and other AI model providers.</td></tr>
+    <tr><td><b>4 Access</b></td><td><b>System access.</b> Segregation of duties: who can touch what.</td><td>SharePoint, OneDrive and Teams permissions, plus tools that find and hide overshared sites.</td></tr>
+    <tr><td><b>5 Action</b></td><td><b>Approval limits.</b> A manager can sign up to a set amount.</td><td>Choosing the Copilot that can only draft over the one that can send, book or update.</td></tr>
+    <tr><td><b>6 Oversight</b></td><td><b>The approval matrix,</b> plus review and reconciliation after the fact.</td><td>Human sign-off on consequential decisions, with Copilot activity in Purview audit, retention and eDiscovery.</td></tr>
+  </table>
+  <div class="callout coral" style="margin-top:16pt"><b class="k">The short version</b><p>These are internal controls for Copilot. Same logic, new kind of worker, and most of the switches already exist in your tenant.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>3</span></div>
+</section>
+
+<!-- 4 OWNER -->
+<section class="page">
+  <p class="eyebrow">Question 1 of 6</p>
+  <h1>Owner: who owns<br>the outcome?</h1>
+  <p class="lead">Every Copilot use case and every agent in production has a named business owner. One person, with a title, whose name is on the result.</p>
+  <div class="row">
+    <div class="card"><h4>NOT THIS</h4>"IT turned on Copilot, so IT owns it."</div>
+    <div class="card teal"><h4>THIS</h4>"The VP of Human Resources owns the 360 summary agent and decides who can use it."</div>
+  </div>
+  <h2>Why this matters more with Copilot</h2>
+  <p>In Microsoft 365, anyone with a Copilot license can build an agent with Agent Builder and share it with colleagues. That's useful, and it means agents can multiply quietly. Each one needs an owner who answers for what it does.</p>
+  <h2>Three things give ownership teeth, the Microsoft way</h2>
+  <table>
+    <tr><th style="width:22%">What it needs</th><th>Where it lives in Microsoft 365</th></tr>
+    <tr><td><b>A log</b></td><td>Copilot activity is recorded in the Microsoft Purview audit log. How long it's kept depends on your license, so check before you rely on it.</td></tr>
+    <tr><td><b>An off switch</b></td><td>Admins can block or unblock an agent for the whole organization from the Agents page in the Microsoft 365 admin center. A person's access can also be removed by unassigning their Copilot license.</td></tr>
+    <tr><td><b>A review date</b></td><td>No setting does this for you. Put it on the owner's calendar, and review the agent inventory at the same time.</td></tr>
+  </table>
+  <div class="callout gold"><b class="k">Worth asking IT</b><p>Who holds the AI Administrator role in your tenant? Several of the settings in this guide need that role, and that person should know who the business owners are.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>4</span></div>
+</section>
+
+<!-- 5 DATA -->
+<section class="page">
+  <p class="eyebrow">Question 2 of 6</p>
+  <h1>Data: what does Copilot<br>need to know?</h1>
+  <p class="lead">Copilot can draw on email, chats, meetings and files. For any one task it needs far less. Give each use case the minimum, and label the rest so Copilot treats it with care.</p>
+  <h2>Four classes, mapped to sensitivity labels</h2>
+  <div class="row">
+    <div class="card teal"><h4>Public</h4>Website copy, press releases. Label: Public.</div>
+    <div class="card"><h4>Internal</h4>Process docs, meeting notes, FAQs. Label: General.</div>
+    <div class="card gold"><h4>Confidential</h4>Contracts, financials, employee records. Label: Confidential.</div>
+    <div class="card coral"><h4>Restricted</h4>SSNs, bank details, health information, privileged legal. Label: Highly Confidential, with encryption.</div>
+  </div>
+  <p class="small" style="margin-top:5pt">Label names vary by organization. Match these four classes to the labels your tenant already uses.</p>
+  <h2>What labels do for Copilot</h2>
+  <ul>
+    <li><b>Copilot respects encryption.</b> If a label encrypts a file and the person doesn't have the right to copy content from it (Microsoft calls this the EXTRACT right), Copilot can't show them its text. It can only point to the file.</li>
+    <li><b>Labels travel with answers.</b> Copilot shows the labels of the files it used, and new content created from a labeled file can pick up that label.</li>
+    <li><b>Labels need a person to set them up.</b> Publishing labels and deciding which are encrypted is a Purview task. If nobody has done it, Copilot has nothing to respect.</li>
+  </ul>
+  <h2>Four ways to handle the data, safest first</h2>
+  <div class="row">
+    <div class="card"><h4>1</h4>No sensitive data required</div>
+    <div class="card"><h4>2</h4>Redacted or anonymized data</div>
+    <div class="card"><h4>3</h4>Synthetic or example data, like a made-up 360 for a demo</div>
+    <div class="card"><h4>4</h4>Real confidential data, labeled, in a site with the right permissions</div>
+  </div>
+  <div class="callout coral"><b class="k">Example: summarizing 360 feedback</b><p>Copilot needs one person's ratings and comments from the Forms export. It doesn't need other employees' reviews, pay data, medical leave records or the rest of the HR site.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>5</span></div>
+</section>
+
+<!-- 6 ENVIRONMENT -->
+<section class="page">
+  <p class="eyebrow">Question 3 of 6</p>
+  <h1>Environment: where is it<br>processed, and who else<br>touches it?</h1>
+  <p class="lead">"We use Copilot" doesn't tell you enough. These are different environments, with different controls:</p>
+  <div class="row" style="margin-bottom:6pt">
+    <div class="card"><h4>Consumer Copilot</h4>Signed in with a personal Microsoft account. Not for work data.</div>
+    <div class="card teal"><h4>Copilot Chat</h4>Work account, no Copilot license. Uses the web and files you upload.</div>
+    <div class="card teal"><h4>Microsoft 365 Copilot</h4>Licensed. Also draws on your email, chats and files.</div>
+    <div class="card gold"><h4>Agents</h4>Built in Agent Builder or Copilot Studio, with their own knowledge and tools.</div>
+  </div>
+  <h2>Five checks, answered for Copilot</h2>
+  <table>
+    <tr><th style="width:17%">Check</th><th>What to confirm in Microsoft 365</th></tr>
+    <tr><td><b>1 Account</b></td><td>People sign in with their work account. That's what turns on enterprise data protection, which covers both Copilot Chat and Microsoft 365 Copilot.</td></tr>
+    <tr><td><b>2 Training</b></td><td>Under enterprise data protection, Microsoft says prompts, responses and the data Copilot reads aren't used to train its foundation models.</td></tr>
+    <tr><td><b>3 Retention</b></td><td>Purview retention policies can cover Copilot prompts and responses, but they aren't retroactive, so set them before rollout. Files uploaded to Copilot Chat are saved in the person's OneDrive. Copilot's memory feature isn't covered by standard holds.</td></tr>
+    <tr><td><b>4 Contract</b></td><td>Copilot runs under Microsoft's Product Terms and Data Protection Addendum. I flag questions about them and route them to legal; I don't interpret contracts.</td></tr>
+    <tr><td><b>5 Vendor chain</b></td><td><b>Web search:</b> Copilot can send search queries to Bing. Admins can turn this off with a policy.<br><b>Other AI providers:</b> some Copilot features can use Anthropic's models, with Anthropic as a Microsoft subprocessor. An admin setting controls this, and the default has varied by tenant and region.<br><b>Agents and connectors:</b> each one is another path for data.</td></tr>
+  </table>
+  <div class="callout gold"><b class="k">Worth saying out loud</b><p>Never assume "enterprise Copilot" means every control you want is switched on. Web search and other model providers are tenant settings, and someone has to look at them.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>6</span></div>
+</section>
+
+<!-- 7 ACCESS -->
+<section class="page">
+  <p class="eyebrow">Question 4 of 6</p>
+  <h1>Access: what can<br>Copilot reach?</h1>
+  <p class="lead">Least privilege still applies: Copilot should only reach what the job needs. In Microsoft 365, that comes down to permissions, because Copilot works as the person using it and sees what they can see.</p>
+  <h2>The real risk is oversharing</h2>
+  <p>Old SharePoint sites, "anyone in the organization" links and large Teams memberships give people access they never use. Before Copilot, nobody stumbled on those files. With Copilot, a plain question can bring them up.</p>
+  <h2>Microsoft's tools for finding and fixing it</h2>
+  <table>
+    <tr><th style="width:30%">Tool</th><th>What it does</th></tr>
+    <tr><td><b>Data access governance reports</b></td><td>Show sites that are shared broadly or have sharing links, so you know where to look first.</td></tr>
+    <tr><td><b>Restricted Content Discovery</b></td><td>Keeps a site out of Copilot and organization-wide search results without changing anyone's permissions. A good stopgap while you clean up.</td></tr>
+    <tr><td><b>Restricted access control</b></td><td>Limits a site to the members of a named group.</td></tr>
+    <tr><td><b>Sensitivity labels on sites</b></td><td>Set privacy and sharing rules for a whole site or team.</td></tr>
+  </table>
+  <p class="small" style="margin-top:5pt">These SharePoint Advanced Management features become available once at least one Microsoft 365 Copilot license is assigned. A few features still need a separate add-on.</p>
+  <h2>Same tool, two risk profiles</h2>
+  <div class="row">
+    <div class="card teal"><h4>Agent A: answers from one folder</h4>An Agent Builder agent that answers HR policy questions from one approved SharePoint folder. If it's wrong, a person reads a bad answer.</div>
+    <div class="card coral"><h4>Agent B: reaches and acts everywhere</h4>An agent that can read all mailboxes and sites, send email and update calendars. If it's wrong, it can send, forward or book the mistake.</div>
+  </div>
+  <div class="callout gray"><b class="k">Access is what it can reach. Action is what it can change.</b><p>Set access before files move into SharePoint, not after Copilot finds them.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>7</span></div>
+</section>
+
+<!-- 8 ACTION -->
+<section class="page">
+  <p class="eyebrow">Question 5 of 6</p>
+  <h1>Action: what can<br>Copilot change?</h1>
+  <p class="lead">The big line is between Copilot that recommends and Copilot that acts. In Microsoft 365, which Copilot you use largely decides which side of that line you're on.</p>
+  <table>
+    <tr><th style="width:50%">Recommends</th><th>Acts</th></tr>
+    <tr><td>"Draft a reply to this candidate" in Outlook</td><td>An agent that replies to candidates on its own</td></tr>
+    <tr><td>"Summarize this 360 file" in Copilot Chat</td><td>An agent that emails summaries to managers automatically</td></tr>
+    <tr><td>"Which times work for all four interviewers?"</td><td>An agent that books, moves and cancels interviews</td></tr>
+  </table>
+  <h2>The autonomy ladder, with Microsoft examples</h2>
+  <table class="ladder">
+    <tr><th style="width:24%">Level</th><th style="width:36%">What it means</th><th>Where you'll see it in Microsoft 365</th></tr>
+    <tr><td><b>0 Answers</b></td><td>Responds to questions</td><td>Copilot Chat. An Agent Builder agent answering from approved files.</td></tr>
+    <tr><td><b>1 Recommends</b></td><td>A person decides and acts</td><td>Copilot suggesting meeting times, flagging themes in comments</td></tr>
+    <tr><td><b>2 Drafts</b></td><td>A person reviews, then sends or files it</td><td>Copilot in Word, Outlook and Excel. You press Send.</td></tr>
+    <tr><td><b>3 Acts after approval</b></td><td>A person approves every action</td><td>Copilot Studio agents with actions set to ask before they run</td></tr>
+    <tr><td><b>4 Acts within limits</b></td><td>Acts alone inside written limits, and logs everything</td><td>Copilot Studio agents with triggers and connectors</td></tr>
+    <tr><td><b>5 Plans its own steps</b></td><td>Decides its next steps across systems</td><td>Copilot Cowork, which breaks a goal into tasks across Outlook, Teams and Office, and can be allowed to use a browser</td></tr>
+  </table>
+  <div class="row" style="margin-top:10pt">
+    <div class="card teal"><h4>Good starting point</h4>Copilot Chat and Agent Builder keep you at levels 0 to 2. They're included with Microsoft 365 Copilot and don't need an IT project.</div>
+    <div class="card coral"><h4>Needs IT and governance first</h4>Copilot Studio actions and Cowork reach levels 3 to 5. Cowork must be turned on by an admin, uses usage-based billing, and keeps browser use off unless an admin allows it.</div>
+  </div>
+  <div class="callout"><b class="k">Organizations earn their way up the ladder</b><p>Move up one level only after a trial period, tracked errors and the owner's sign-off. Nobody should start at the top.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>8</span></div>
+</section>
+
+<!-- 9 OVERSIGHT -->
+<section class="page">
+  <p class="eyebrow">Question 6 of 6</p>
+  <h1>Oversight: where must<br>a human decide?</h1>
+  <p class="lead">Tie human approval to consequence and how hard the action is to reverse. Then make sure there's a record.</p>
+  <div class="row">
+    <div class="card teal"><h4><span class="tag g">GREEN</span> Copilot can do it</h4>Formatting a document. Summarizing a public article. Turning meeting notes into a task list.</div>
+    <div class="card gold"><h4><span class="tag y">YELLOW</span> Copilot drafts, a person approves</h4>Job descriptions. Candidate emails. 360 summaries before they reach a manager.</div>
+    <div class="card coral"><h4><span class="tag r">RED</span> A person owns the decision</h4>Hiring, pay, promotion, discipline and termination. Legal conclusions. Anything a regulator could ask about.</div>
+  </div>
+  <h2>The Microsoft paper trail</h2>
+  <table>
+    <tr><th style="width:28%">What</th><th>Why it matters</th></tr>
+    <tr><td><b>Purview audit log</b></td><td>Records that Copilot interactions happened, with the user, time and app. How long logs are kept depends on your license.</td></tr>
+    <tr><td><b>Retention policies</b></td><td>Keep Copilot prompts and responses for as long as your records rules require. Set them before rollout, because they don't reach back.</td></tr>
+    <tr><td><b>eDiscovery</b></td><td>Lets legal and compliance find and export Copilot prompts and responses for an investigation.</td></tr>
+  </table>
+  <p class="small" style="margin-top:5pt">For regulated firms, ask compliance which of these your recordkeeping rules require before anyone uses Copilot with client or employee information.</p>
+  <h2>The output check</h2>
+  <p>Controls on what goes in don't cover what comes out. Before anything Copilot produced is used:</p>
+  <div class="row">
+    <div class="card"><h4>Is it true?</h4>Numbers, names and facts checked against the source file. Excel does the math, not the chat.</div>
+    <div class="card"><h4>What's in it?</h4>No sensitive detail carried in by accident. Check the label Copilot shows.</div>
+    <div class="card"><h4>Where does it go?</h4>Who will see it, and is the sharing link set to the right people?</div>
+  </div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>9</span></div>
+</section>
+
+<!-- 10 DECISION GRID -->
+<section class="page">
+  <p class="eyebrow">Putting it together</p>
+  <h1>The decision grid,<br>for Copilot</h1>
+  <p class="lead">Find the data class down the side and the autonomy level across the top. The cell says what's required. It's a starting point each organization calibrates to its own risk tolerance.</p>
+  <table class="grid">
+    <tr><th style="width:16%">Data class</th><th>Answer or recommend<br>(levels 0 to 1)</th><th>Draft<br>(level 2)</th><th>Act with approval<br>(level 3)</th><th>Act on its own<br>(levels 4 to 5)</th></tr>
+    <tr><td class="h">Public</td><td><span class="tag g">GREEN</span><br>Copilot Chat with a work account</td><td><span class="tag g">GREEN</span><br>Spot-check before use</td><td><span class="tag y">YELLOW</span><br>Approve each action</td><td><span class="tag y">YELLOW</span><br>Written limits, audit logging, owner reviews</td></tr>
+    <tr><td class="h">Internal</td><td><span class="tag g">GREEN</span><br>Work account, enterprise data protection on</td><td><span class="tag g">GREEN</span><br>Author reviews before use</td><td><span class="tag y">YELLOW</span><br>Approve each action, logged in Purview</td><td><span class="tag y">YELLOW</span><br>Written limits, logging, agent can be blocked fast</td></tr>
+    <tr><td class="h">Confidential</td><td><span class="tag y">YELLOW</span><br>Licensed Copilot, files labeled, permissions checked</td><td><span class="tag y">YELLOW</span><br>A person reviews before anything leaves</td><td><span class="tag y">YELLOW</span><br>Approve each action, logged, owner named</td><td><span class="tag r">RED</span><br>Owner approves the use case, pilot first</td></tr>
+    <tr><td class="h">Restricted</td><td><span class="tag r">RED</span><br>Redact or use synthetic data first</td><td><span class="tag r">RED</span><br>Encrypted label, restricted site, owner sign-off</td><td><span class="tag r">RED</span><br>Owner, security and legal sign-off</td><td><span class="tag r">RED</span><br>Most organizations stop here</td></tr>
+  </table>
+  <div class="callout coral" style="margin-top:14pt"><b class="k">One override</b><p>If a use case fails the red-flag test on the next page, it's red by default, wherever it lands on the grid.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>10</span></div>
+</section>
+
+<!-- 11 RED FLAG + INJECTION -->
+<section class="page">
+  <p class="eyebrow">A quick test for any use case</p>
+  <h1>The red-flag test,<br>in Microsoft 365</h1>
+  <p class="lead">Simon Willison calls it the lethal trifecta: an AI that has all three of these at once. Here's what each one looks like in Copilot.</p>
+  <table>
+    <tr><th style="width:30%">The flag</th><th>In Microsoft 365, it looks like</th></tr>
+    <tr><td><b>1 Access to private data</b></td><td>Licensed Copilot reading mailboxes, chats, OneDrive and SharePoint</td></tr>
+    <tr><td><b>2 Exposure to untrusted content</b></td><td>Emails from outside, résumés, vendor PDFs, web search results, documents shared in from other companies</td></tr>
+    <tr><td><b>3 A way to send information out</b></td><td>Sending email, posting in Teams, creating sharing links, Copilot Studio connectors, Cowork with browser use on</td></tr>
+  </table>
+  <div class="callout coral"><b class="k">The rule</b><p>If a use case has all three, it's red by default until a control removes one. Keeping Copilot at Draft, where a person presses Send, takes away the third.</p></div>
+  <h2>When the model gets fooled</h2>
+  <p>Emails, résumés and PDFs can carry hidden instructions that Copilot reads as commands. Microsoft builds in its own defenses, and the framework doesn't rely on them alone. Each layer limits the damage on its own:</p>
+  <table>
+    <tr><th style="width:22%">Layer</th><th>The Microsoft 365 control</th></tr>
+    <tr><td><b>Owner</b></td><td>Sees it in the audit log and blocks the agent from the admin center</td></tr>
+    <tr><td><b>Data</b></td><td>Encrypted labels keep restricted text out of answers</td></tr>
+    <tr><td><b>Environment</b></td><td>Work accounts, web search policy, AI provider settings</td></tr>
+    <tr><td><b>Access</b></td><td>Tight permissions and Restricted Content Discovery</td></tr>
+    <tr><td><b>Action</b></td><td>Drafting tools first, approvals on any action that sends or changes something</td></tr>
+    <tr><td><b>Oversight</b></td><td>A person approves the consequential step, and Purview keeps the record</td></tr>
+  </table>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>11</span></div>
+</section>
+
+<!-- 12 WORKED EXAMPLE -->
+<section class="page">
+  <p class="eyebrow">Worked example</p>
+  <h1>"We want Copilot to<br>summarize our 360 feedback"</h1>
+  <p class="lead">The answer doesn't start with prompts. It starts with the six questions.</p>
+  <table>
+    <tr><th style="width:20%">Question</th><th>The answer</th></tr>
+    <tr><td><b>Owner</b></td><td>The VP of Human Resources, with a review date after the first cycle</td></tr>
+    <tr><td><b>Data</b></td><td>One person's ratings and comments from the Forms export. Confidential. Summaries get the Confidential label.</td></tr>
+    <tr><td><b>Environment</b></td><td>Licensed Microsoft 365 Copilot with a work account. Web search off for this task. Compliance has reviewed the AI provider settings.</td></tr>
+    <tr><td><b>Access</b></td><td>Exports and summaries live in a private HR site, set up before any files move. Managers see only their own people's summaries.</td></tr>
+    <tr><td><b>Action</b></td><td>Level 2. Copilot drafts the summary and Excel does the math. A person reviews it, saves it and shares it. Later, an Agent Builder agent can run the same steps, still at level 2.</td></tr>
+    <tr><td><b>Oversight</b></td><td>HR reads every summary before a manager sees it. Ratings, pay and promotion decisions stay with people. Groups smaller than three are left out to protect anonymity.</td></tr>
+  </table>
+  <div class="row" style="margin-top:12pt">
+    <div class="card"><h4>Red-flag test</h4><b>Yes</b> private data<br><b>Partly</b> untrusted content (free-text comments)<br><b>No</b> way to send at level 2</div>
+    <div class="card gold"><h4><span class="tag y">YELLOW</span> Grid result</h4>Confidential at Draft. A person reviews before anything leaves HR. Moving to automatic emails to managers would add the third flag, so every send would need approval.</div>
+  </div>
+  <div class="callout" style="margin-top:12pt"><b class="k">Only after those decisions</b><p>do we write the prompts and build the agent.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>12</span></div>
+</section>
+
+<!-- 13 CHECKLIST -->
+<section class="page">
+  <p class="eyebrow">Before you roll out</p>
+  <h1>Ten Copilot settings<br>to look at first</h1>
+  <p class="lead">Take this list to whoever runs your Microsoft 365 tenant. Most are a short conversation, not a project.</p>
+  <table class="check">
+    <tr><th></th><th style="width:38%">Setting or decision</th><th>Question to ask</th></tr>
+    <tr><td>1</td><td><b>Who has the admin roles</b></td><td>Who is our AI Administrator and Global Administrator?</td></tr>
+    <tr><td>2</td><td><b>Copilot licenses</b></td><td>Who has a Microsoft 365 Copilot license, and who only has Copilot Chat?</td></tr>
+    <tr><td>3</td><td><b>Web search</b></td><td>Is web search on in Copilot, and for whom?</td></tr>
+    <tr><td>4</td><td><b>AI providers operating as Microsoft subprocessors</b></td><td>Are Anthropic models on in our tenant? Has compliance reviewed that?</td></tr>
+    <tr><td>5</td><td><b>Cowork and usage-based billing</b></td><td>Is Cowork on? If so, for whom, with what spending limits, and is browser use off?</td></tr>
+    <tr><td>6</td><td><b>Agents</b></td><td>Who can build and share agents? Who reviews the agent inventory?</td></tr>
+    <tr><td>7</td><td><b>Oversharing reports</b></td><td>Have we run the data access governance reports in SharePoint?</td></tr>
+    <tr><td>8</td><td><b>Restricted Content Discovery</b></td><td>Which sensitive sites should be kept out of Copilot until permissions are cleaned up?</td></tr>
+    <tr><td>9</td><td><b>Sensitivity labels</b></td><td>Are labels published? Which ones encrypt, and do they block Copilot where they should?</td></tr>
+    <tr><td>10</td><td><b>Audit and retention</b></td><td>Is Copilot activity being logged? Is there a retention policy for Copilot prompts and responses?</td></tr>
+  </table>
+  <div class="callout gold" style="margin-top:12pt"><b class="k">A note on menu names</b><p>Microsoft renames and moves Copilot settings often. Confirm current names and paths on Microsoft Learn or in your admin center before you rely on this list.</p></div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>13</span></div>
+</section>
+
+<!-- 14 SOURCES -->
+<section class="page src">
+  <p class="eyebrow">Further reading</p>
+  <h1>Sources</h1>
+  <p class="lead">Checked November 2026. Microsoft documentation changes often, so treat it as current only as of that date.</p>
+  <h2>Microsoft</h2>
+  <p><b>Enterprise data protection in Microsoft 365 Copilot and Copilot Chat</b><br><a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/enterprise-data-protection">learn.microsoft.com/en-us/copilot/microsoft-365/enterprise-data-protection</a></p>
+  <p><b>Microsoft 365 Copilot best practices with SharePoint</b><br><a href="https://learn.microsoft.com/en-us/sharepoint/sharepoint-copilot-best-practices">learn.microsoft.com/en-us/sharepoint/sharepoint-copilot-best-practices</a></p>
+  <p><b>SharePoint Advanced Management features with a Copilot license</b><br><a href="https://learn.microsoft.com/en-us/sharepoint/sharepoint-advanced-management-features-copilot-license">learn.microsoft.com/en-us/sharepoint/sharepoint-advanced-management-features-copilot-license</a></p>
+  <p><b>Copilot architecture, data protection and auditing</b><br><a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-architecture-data-protection-auditing">learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-architecture-data-protection-auditing</a></p>
+  <p><b>Microsoft Purview protections for Copilot</b><br><a href="https://learn.microsoft.com/en-us/purview/ai-microsoft-purview">learn.microsoft.com/en-us/purview/ai-microsoft-purview</a></p>
+  <p><b>Manage public web access in Copilot</b><br><a href="https://learn.microsoft.com/en-us/copilot/microsoft-365/manage-public-web-access">learn.microsoft.com/en-us/copilot/microsoft-365/manage-public-web-access</a></p>
+  <p><b>Copilot in Microsoft 365 apps with Anthropic models</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/copilot-anthropic-apps">learn.microsoft.com/en-us/microsoft-365/copilot/copilot-anthropic-apps</a></p>
+  <p><b>Copilot Cowork admin and governance</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-admin-governance">learn.microsoft.com/en-us/microsoft-365/copilot/cowork/cowork-admin-governance</a></p>
+  <p><b>Governance and lifecycle actions for agents in the Microsoft 365 admin center</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/admin/manage/agent-actions">learn.microsoft.com/en-us/microsoft-365/admin/manage/agent-actions</a></p>
+  <p><b>Cost considerations for Copilot agents</b><br><a href="https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/cost-considerations">learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/cost-considerations</a></p>
+  <h2>From the original framework</h2>
+  <p><b>OWASP Top 10 for LLM Applications 2025</b><br><a href="https://genai.owasp.org/llm-top-10">genai.owasp.org/llm-top-10</a></p>
+  <p><b>NIST AI 600-1, Generative AI Profile</b><br><a href="https://www.nist.gov/itl/ai-risk-management-framework">nist.gov/itl/ai-risk-management-framework</a></p>
+  <p><b>"The lethal trifecta for AI agents," Simon Willison, June 16, 2025</b><br><a href="https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/">simonwillison.net/2025/Jun/16/the-lethal-trifecta</a></p>
+  <div style="position:absolute;bottom:1in;left:0.8in;display:flex;gap:12pt;align-items:center">
+    <img src="gpp-logo.svg" style="width:0.55in;height:0.55in" alt="">
+    <div><p style="margin:0;font-weight:700;color:var(--navy)">Caroline Hinton, Growth Partner Pros</p><p style="margin:0;font-size:9pt;color:var(--teal)">caroline.hinton@growthpartnerpros.com</p></div>
+  </div>
+  <div class="foot"><span>© 2026 Growth Partner Pros. All Rights Reserved.</span><span>14</span></div>
+</section>
+
+</body>
+</html>

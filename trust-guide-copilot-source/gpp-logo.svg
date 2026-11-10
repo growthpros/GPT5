@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200" role="img" aria-label="Growth Partner Pros">
+  <title>Growth Partner Pros</title>
+  <defs>
+    <linearGradient id="gppGrad" gradientUnits="userSpaceOnUse" x1="0" y1="600" x2="1200" y2="600">
+      <stop offset="0" stop-color="#EE3535"/>
+      <stop offset="1" stop-color="#FCBC41"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#gppGrad)" stroke-width="32">
+    <circle cx="600.00" cy="600.01" r="523.83"/>  <!-- outer ring -->
+    <circle cx="600.00" cy="705.82" r="243.18"/>  <!-- bottom -->
+    <circle cx="775.57" cy="594.50" r="243.12"/>  <!-- right -->
+    <circle cx="424.35" cy="594.62" r="243.00"/>  <!-- left -->
+    <circle cx="599.99" cy="478.40" r="243.17"/>  <!-- top -->
+  </g>
+</svg>
