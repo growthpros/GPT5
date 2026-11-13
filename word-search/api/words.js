@@ -5,9 +5,9 @@ import Anthropic from "@anthropic-ai/sdk";
 
 const client = new Anthropic();
 
-// Model choice. Defaults to Claude Opus 5.5; set CLAUDE_MODEL in Vercel to
-// change it (for example claude-haiku-5-5 for a much lower cost per puzzle).
-const MODEL = process.env.CLAUDE_MODEL || "claude-opus-5-5";
+// Model choice. Defaults to Claude Haiku 5.5 (low cost per puzzle); set CLAUDE_MODEL in Vercel to
+// change it (for example claude-opus-5-5 for the most capable model).
+const MODEL = process.env.CLAUDE_MODEL || "claude-haiku-5-5";
 // Server-side refusal fallback is supported on Opus 5.5, not on Haiku 5.5.
 const USE_FALLBACK = MODEL === "claude-opus-5-5";
 
