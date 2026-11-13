@@ -1,0 +1,158 @@
+# Word search commercial markets: (A) consumer apps and web games, (B) KDP / Etsy / TPT puzzle publishing tools
+
+Research date: 13 November 2026. All prices USD unless marked. Source quality note: much of the KDP-tool and benchmark material online is vendor blogs (often competitors reviewing each other) and AI-written summaries; these are flagged where used. Search tool returned snippets, so figures marked "snippet" were not verified against the full page.
+
+## A1. Leading word search apps and web games: monetization, price points, downloads/revenue, ad benchmarks, UA cost, AI use
+
+### Takeaway
+The app category is dominated by studios with paid user acquisition and ad-tech scale (PlaySimple/MTG, PeopleFun/AppLovin, Oakever); the standard model is free + interstitial/rewarded ads + a $4-$10 one-off "remove ads" purchase + coin/hint packs, with IAP revenue for even the top word search title only around $15K-$22K per week in the US and ads supplying most of the money. No leading consumer app was found that generates themed puzzles on demand with AI; AI theme-to-word-list exists only in small web/printable tools.
+
+### Cited Findings
+- Word Search Explorer (PlaySimple Games, owned by MTG): US unified (iOS+Android) IAP revenue ran about $15K-$22K per week in Q4 2025, with weekly downloads peaking at 349K in early November 2025; US iOS alone averaged about $12K/week revenue with downloads peaking at 289K. (Sensor Tower auto-generated quarterly blog, snippet only; these are store/IAP revenue estimates and exclude ad revenue.) — [Sensor Tower Q4 2025 US unified](https://sensortower.com/blog/2025-q4-unified-top-5-word-puzzle-games-revenue-us-603697f4241bc16eb8570d37); [Sensor Tower Q4 2025 iOS US](https://sensortower.com/blog/2025-q4-ios-top-5-puzzle-games-units-us-64bc1644e1714cfff1e615fc)
+- Word Search Explorer in Europe: weekly downloads peaked around 296K in mid-November 2025 while weekly revenue peaked near only $1.9K, i.e. almost no IAP revenue outside the US. — [Sensor Tower Q4 2025 Europe](https://sensortower.com/blog/2025-q4-ios-top-5-word-puzzle-games-revenue-europe-603697f4241bc16eb8570d37)
+- AppGoblin (third-party estimate, undated) lists Word Search Explorer at "$500K+" monthly revenue with ads about 46% of the split. A 2022 newsletter reported the game making $163K a day in ad revenue (old, 2022, unverified third-party figure; the two estimates conflict by roughly 10x). — [AppGoblin](https://appgoblin.info/apps/in.playsimple.wordsearch); [Mobile Gaming Today May 2022](https://gamigion.substack.com/p/mobile-gaming-today-may22)
+- Other top word-puzzle titles for scale: Zen Word (Oakever Games) reached about $113K US revenue by December 2025 with downloads peaking near 194K; Word Collect: Word Search (Super Lucky Games) ended Q1 2025 at about $90K US revenue on a downward trend (snippets; the period each figure covers, week vs month, is not clear from the snippet). — [Sensor Tower Q4 2025 US](https://sensortower.com/blog/2025-q4-unified-top-5-word-puzzle-games-revenue-us-603697f4241bc16eb8570d37); [Sensor Tower Q1 2025 US](https://sensortower.com/blog/2025-q1-unified-top-5-word%20puzzle%20games-revenue-us-603697f4241bc16eb8570d37)
+- Word Search Explorer pricing: free with IAP; "Remove Ads" listed at $5.99 in one App Store listing and $9.99 in another; coin packs $0.99-$19.99; about 764K ratings on the US App Store; reviewers complain of multi-screen ads after a few levels. — [App Store, Word Search Explorer](https://apps.apple.com/us/app/id1602508478)
+- Word Search Pro (Word Brain Games / Nodrix): free with IAP; Remove Ads $9.99; a tracker reports 10 IAPs from $1.99-$12.99 (average $5.69), 4.8 stars from 29.9K reviews. — [App Store, Word Search Pro](https://apps.apple.com/app/id1123930673); [App Pricing Lab](https://apppricinglab.com/app/apple/1123930673)
+- Wordscapes Search (PeopleFun, an AppLovin studio): free with IAP; Remove Ads at $3.99 and $9.99 tiers plus a "30-Day No Full Screen Ads" pass at $9.99 (a time-limited ad-free pass, effectively a soft subscription). — [App Pricing Lab, Wordscapes Search](https://apppricinglab.com/app/apple/1420294918)
+- No subscription was listed for the three apps above. One smaller title, "Word Search The Game", sells a subscription at $12.99/month for all modes, monthly content and no ads. — [App Store, Word Search The Game](https://apps.apple.com/ms/app/id1537377548)
+- PlaySimple is described by owner MTG as a leading free-to-play mobile word games studio based in Bangalore, whose skills underpin MTG's ad-tech and cross-promotion initiatives. — [MTG](https://www.mtg.com/casual-district/playsimple/)
+- AppLovin published a case study on how Wordscapes improved LTV with hybrid (ads + IAP) monetization, confirming hybrid is the norm for word games. — [AppLovin blog](https://applovin.com/blog/how-wordscapes-improved-ltv-hybrid-monetization-trends)
+- Retention: GameAnalytics data reported in trade press says Card, Casino and Word games are the strongest genres for long-term retention (rates above 6%), with D28 retention up to 10% for the best "classic" titles including Word. — [App Developer Magazine](https://appdevelopermagazine.com/mobile-gaming-industry-benchmarks-offer-fresh-look-on-industry/); [GameAnalytics report via Game Industry Library](https://gameindustrylibrary.com/documents/mobile-benchmarks-report-gameanalytics-2019/read) (older report, 2019)
+- CPI: Adjust's 2026 Gaming App Insights report puts global games CPI at $0.56 (+30% YoY); Adjust's 2025 report had hyper-casual at $0.40 and hybrid-casual nearly doubling to $0.95. Neither breaks out word games, and these are global averages (US CPIs are higher). — [Adjust 2026 summary](https://gamedevreports.substack.com/p/adjust-gaming-app-insights-report); [Adjust 2025 summary](https://gamedevreports.substack.com/p/adjust-mobile-games-insights-report)
+- eCPM: a 2026 vendor benchmark gives rewarded video eCPM of $16-$20 (US-tier); a Tenjin/CAS table listed US Android rewarded eCPM at $30.25 for Q2 2024 (stale); GameAnalytics-derived median eCPM for hyper-casual is about $5. Vendor eCPM figures can disagree by up to 4x, and rewarded eCPM on casual Android was reported as drifting down over three consecutive half-years. — [Playio eCPM benchmarks 2026](https://blog.playio.co/mobile-game-ecpm-benchmarks-2026); [Playio rewarded benchmarks 2026](https://blog.playio.co/rewarded-ad-benchmarks-2026); [Tenjin](https://tenjin.com/?p=11489)
+- ARPDAU: no word-game-specific public figure found. One 2026 source reports a 15-20% year-over-year decline in ARPPU and ARPDAU across 100,000 analysed titles. A Words With Friends 2 mediation case study reported a 6%-11% ARPDAU lift across interstitial and rewarded ads (relative, not absolute). — [Game Growth Advisor 2026 KPIs](https://gamegrowthadvisor.com/blog/2026-03-17-mobile-game-kpis-benchmarks-2026/); [Playio ARPDAU benchmarks](https://blog.playio.co/arpdau-benchmarks-mobile-games); [Chartboost case study](https://www.chartboost.com/?p=5861)
+- Web portals: CrazyGames publishes developer guidance on monetizing word games on its portal (revenue-share web distribution is an alternative to app stores). — [CrazyGames docs](https://docs.crazygames.com/resources/monetizing-word/)
+- AI theme generation exists in web/printable tools, not in the leading apps: the Crossword Compiler / cosmologist.info vocab tool lets users "use AI to generate new theme word lists on demand"; Template.net has a free prompt-to-word-search generator; Supercoloring's generator accepts own words, AI suggestions or categories; PuzzleTide ships a CLI/agent "skill" for generating word searches from theme IDs to PDF/SVG. — [cosmologist.info vocab](https://new.cosmologist.info/vocab.html); [Template.net](https://www.template.net/ai-word-search-generator); [Supercoloring](https://287.dev.supercoloring.com/tool/word-search-generator); [PuzzleTide skill](https://smithery.ai/skills/caravaca-labs/puzzletide-word-search)
+
+### Inferences
+- A solo founder cannot realistically compete in the app stores on paid UA: with global CPI around $0.56 and rising 30% a year (higher in the US), and top-title IAP only about $15K-$22K/week in the US, the business depends on ad-revenue scale, cross-promotion networks and mediation expertise that MTG/AppLovin-owned studios have and a solo developer does not.
+- The Europe figure (296K weekly downloads vs about $1.9K weekly IAP) shows that word search players rarely pay; revenue is almost entirely advertising, so a small-audience app earns very little.
+- "AI generates a themed puzzle on request" is not a differentiator the incumbents advertise, but it is already commoditised in free web tools, so it is easy to copy and unlikely to be a moat by itself.
+- A rough ad-revenue sanity check a founder can run: with a hypothetical 1,000 DAU and casual ARPDAU of a few cents, daily revenue is tens of dollars. (No sourced word-game ARPDAU was found, so this is an illustration, not a benchmark.)
+
+### Gaps
+- No reliable public ARPDAU or US interstitial eCPM specifically for word or word search games was found; GameAnalytics GameIntel, Tenjin and Adjust full reports would have it but sit behind sign-ups.
+- No download/revenue data found for Wordscapes Search, Word Search Pro, Wordament, Razzle Puzzles, Arkadium, AARP Games, Puzzle Baron or 247 Word Search. Web portals (Arkadium, AARP, 247 Games, Puzzle Baron, Razzle) are ad-supported with some subscription/ad-free options, but I did not retrieve sourced figures for traffic, pricing or revenue in this pass.
+- Sensor Tower figures come from auto-generated blog summaries read as snippets; the time unit behind some figures is ambiguous.
+- Word-game-specific CPI (US) not found.
+
+## A2. NYT Strands and themed word-find games: evidence of demand for themed puzzles
+
+### Takeaway
+Strands, a themed word-find launched in beta in March 2024, was played 1.5 billion times in 2025, making it NYT's third most played game; that is strong evidence that hand-edited, cleverly themed word-finding has mass appeal, but the demand accrues to a daily, editor-curated, brand-distributed ritual rather than to on-demand generation.
+
+### Cited Findings
+- In 2025 NYT Games puzzles were played 11.2 billion times in total; Strands had 1.5 billion plays, ahead of the Mini Crossword (1.4 billion), Spelling Bee (667 million) and Pips (612 million); Connections had 1.6 billion successful solves. — [NBC New York](https://www.nbcnewyork.com/entertainment/entertainment-news/hardest-wordle-connections-games-2025/6436464/?amp=1); [Creative Review](https://www.creativereview.co.uk/new-york-times-games-wordle-crossplay-design-jonathan-knight/)
+- An earlier-year data set (apparently 2024) gives 11.1 billion total plays with Wordle 5.3 billion, Connections 3.3 billion and Strands 1.3 billion (Wikipedia-derived mirror; attribution unclear). — [Wikipedia mirror, NYT Games](https://wiki.krisyotam.com/content/wikipedia_en_all_nopic_2026-03/NYT_Games)
+- CNN (June 2024) reported Strands as NYT's "next hit game" within months of its beta. — [CNN via ABC17](https://abc17news.com/money/cnn-business-consumer/2024/06/26/with-strands-the-new-york-times-has-found-its-next-hit-game/)
+- A Strands archive was introduced in September 2025 (archives are a subscriber benefit in NYT Games). — [Wikipedia mirror, NYT Games](https://wiki.krisyotam.com/content/wikipedia_en_all_nopic_2026-03/NYT_Games)
+- NYT treats Games as a core part of its subscription bundle alongside News, Cooking, Wirecutter and The Athletic. — [Creative Review](https://www.creativereview.co.uk/new-york-times-games-wordle-crossplay-design-jonathan-knight/)
+- NYT Games subscription price: Apple IAP trackers show Games monthly options at $4.99, $5.99 and $6.99 (undated, unconfirmed against NYT's page); NYT's help centre points to nytimes.com/subscription/games for current pricing. — [App Pricing Lab](https://apppricinglab.com/iap/apple/307569751); [NYT Help Center](https://thenewyorktimeshelpcenter.helpjuice.com/360052272251-New-York-Times-Games-Subscription)
+- Strands has attracted academic attention (a 2026 FUN conference paper on the game). — [LIPIcs FUN 2026](https://drops.dagstuhl.de/storage/00lipics/lipics-vol366-fun2026/LIPIcs.FUN.2026.2/LIPIcs.FUN.2026.2.pdf)
+
+### Inferences
+- Strands' success shows theme is the value: its twist (hidden theme, "spangram", every letter used) is editorial craft. A generic generator that drops an AI word list into a random grid does not reproduce that.
+- The monetization path that works here is subscription-bundle retention for a publisher, which supports the B2B angle (publishers wanting their own Strands-like game) more than a standalone consumer app.
+
+### Gaps
+- No Strands-specific revenue, subscriber attribution or daily-active figures found.
+- Current confirmed NYT Games standalone price (US/UK/AU) not verified from NYT's own page.
+- Did not find data on Strands clones (e.g., LinkedIn or other publishers' themed word finds) and their traction.
+
+## B1. Tools used by KDP puzzle book creators: pricing, features, licences, AI theme-to-list
+
+### Takeaway
+The creator-tool market is crowded and cheap: lifetime puzzle generator bundles sell for roughly $40-$360 one-time, subscriptions for about $10-$20/month, and several 2026 entrants (KDP Easy, KDP Builder, Univers Studio, AutomateEd) already offer AI theme-to-word-list and whole-book generation with commercial rights. An AI themed word search generator is therefore a feature that already exists at low price points, not an open gap.
+
+### Cited Findings
+- Book Bolt: Newbie plan $9.99/month (about $89.99/year); Pro plan $19.99/month; only Pro includes the Puzzle Creator generators (including word search); 3-day free trial. Third-party checks in August-September 2026 saw conflicting packaging on the official page (three tiers at $11.99/$23.99/$35.99 monthly or $9.99/$19.99/$29.99 on annual billing vs two plans), so live pricing should be rechecked; the official pricing page blocked my fetch (HTTP 403). — [RevenueGeeks](https://revenuegeeks.com/book-bolt-pricing/); [Toolsurf](https://www.toolsurf.com/book-bolt-lifetime-deal-2026/); [Low Content Profits](https://lowcontentprofits.com/book-bolt-studio-review); [AI Made For](https://www.aimadefor.com/blog/bookbolt-amazon-kdp-pricing-tools-fit/)
+- Self Publishing Titans puzzle tools: four "Puzzle & Activity Bundles" at $149 each one-time (lifetime access, updates, unlimited exports), or the Master Suite of all four for $357 one-time (list $596); $1 three-day trial; "Pay once. No subscription."; Bundle 1.0 has 20+ generators including word search. The fetched page does not mention AI word-list generation and does not spell out licence terms (links to ToS). Other SPT sales pages show $89 for a single bundle with "full commercial rights for KDP and print-on-demand", so prices vary by page/promotion. — [Self Publishing Titans all puzzle tools](https://selfpublishingtitans.com/all-puzzle-tools-sales); [SPT Bundle 1 sales page](https://www.selfpublishingtitans.com/puzzle-activity-bundle-1-sales)
+- Bowes Publishing (PowerPoint add-in + Puzzle Generator): £8.99/month plan including Puzzle Generator Standard and "commercial rights to your creations"; a lifetime add-in listing at £500; a lifetime promotion advertised at £60. — [Bowes Publishing Gumroad](https://bowespublishing.gumroad.com/l/hkSrq); [Bowes lifetime promo](https://bowespublishing.gumroad.com/p/get-lifetime-puzzle-generator-access-for-just-60)
+- Bearwood Labs Puzzle Bundle: one-time fee, commercial use, $39 per product or $156 for the four-product set (sale page, may be dated). — [Bearwood Labs Gumroad](https://bearwoodlabs.gumroad.com/l/puzzle-bundle)
+- Very cheap single-purpose tools exist: a Gumroad word search generator at $1.99 with unlimited use and lifetime updates; Marina Art Design generator at $60+ (one-year licence with free lifetime extension); KDPReady puzzle generators sold as annual licences at about £15-£25/year each. — [wzijam Gumroad](https://wzijam.gumroad.com/l/wordsearchgenerator); [Marina Art Design](https://marinaartdesign.gumroad.com/l/ifwpm); [KDPReady](https://kdpready.gumroad.com)
+- Puzzle Publishers "Instant Puzzle Generator": described as a complete puzzle book publishing suite; a reviewer bought it in 2021 for word search books; no current price found. The related "Puzzle Book Mastery" product is listed at $37 front-end with a $24.95 upsell (affiliate page, unverified). — [Low Content Profits review](https://lowcontentprofits.com/instant-puzzle-generator-review-create-sunning-word-search-books-fast/); [Puzzle Book Mastery affiliate page](https://sites.google.com/view/puzzlebookmastery)
+- KDP Easy Word Search Creator: user enters a theme (e.g. "Beach Vacation", "Dog Breeds") and AI writes the word list; grids 10x10 to 30x30; 1/2/4/6 puzzles per page; single PDF with solutions; credit pricing of 0.1 credits per page, 1 credit for KDP listing text, 5 credits for a cover, 10 free credits on sign-up; watermark removed on any paid plan; FAQ says output can be sold on Amazon KDP, Etsy or your own site. Plan prices not on the fetched page. — [KDP Easy](https://www.kdpeasy.com/features/word-search-creator)
+- KDP Builder markets an "AI-Powered Puzzle Book Generator" and publishes niche research (16 puzzle niches, 8 rated low competition). — [KDP Builder tool](https://kdpbuilder.com/tools/puzzle-book-generator); [KDP Builder niches](https://kdpbuilder.com/niches/puzzle-books)
+- Other 2026 competitors with puzzle/word search makers: Univers Studio (publishes comparison pages against Book Bolt and Puzzle Maker Pro), AutomateEd (word search maker, lifetime-access promotions), PuzzleForge (free KDP puzzle generator), PuzzlePage (freemium from $2.99, KDP-formatted PDFs, commercial use on paid plans), Sheetworks.ai, Kuraplan and Education Copilot (teacher-focused). — [Univers Studio](https://univers.studio/blog/best-puzzle-maker-kdp/); [AutomateEd](https://www.automateed.com/word-search-maker); [PuzzleForge](https://puzzleforge-907.pages.dev/free-kdp-puzzle-generator.html); [PuzzlePage](https://peerpush.com/p/puzzlepage); [Sheetworks](https://sheetworks.ai/tools/word-search); [Education Copilot](https://educationcopilot.com/?p=546)
+- PLR shortcuts undercut tools: e.g. a "PLR Puzzle Pack for KDP" with 220 sudoku, mazes and word searches sold with a commercial licence. — [Getly](https://www.getly.store/product/plr-puzzle-pack-for-kdp-220-new-sudoku-mazes-and-word-search-with-commercial-lic-mv04tuta)
+
+### Inferences
+- Price anchors for a new tool: about $10-$20/month or a $40-$150 lifetime deal; buyers in this niche are trained to expect one-time pricing and commercial rights included, which caps LTV for a new entrant.
+- The buyer base (KDP "low-content" publishers) is price-sensitive, churn-prone and shrinking in profitability (see B2), so selling shovels here is a small, contested market rather than an underserved one.
+- Differentiation would have to come from output quality (curated, non-repetitive, verified word lists; large-print layouts; series tooling) rather than from "AI generates the list".
+
+### Gaps
+- Could not retrieve current pricing/licence pages for Tangent Templates, A Book Creator / Puzzle Wiz, Crossword Hobbyist / My Word Search, PuzzleGen or Puzzle Maker Pro; no sourced figures for these in this pass.
+- Book Bolt's official pricing page returned 403; figures are from third-party reviewers that conflict.
+- Puzzle Publishers / Instant Puzzle Generator current price and licence not found.
+- No user counts or revenue for any of these tool vendors.
+
+## B2. Amazon KDP word search book market: saturation, prices, royalties, niches, policy
+
+### Takeaway
+Generic word search books are saturated ("nobody wins the search term 'word search book' anymore"); the remaining advice is narrow themed large-print series for seniors at $7.99-$13.99, where per-copy royalties are small (well under $4, and near zero at $7.99 on large-trim books). KDP requires disclosure of AI-generated text/images, and third-party reports describe tighter 2026 enforcement against mass-produced AI and low-content titles.
+
+### Cited Findings
+- KDP official content guidelines: "We require you to inform us of AI-generated content (text, images, or translations) when you publish a new book or make edits to and republish an existing book"; AI-assisted content (tools used to edit, refine, error-check your own work) need not be disclosed; the publisher is responsible for all AI content meeting guidelines; KDP does not allow "content that's typically disappointing to customers". — [KDP Content Guidelines](https://kdp.amazon.com/help/topic/G200672390)
+- Authors Guild reported that Amazon added to its KDP generative-AI policy and capped daily self-publishing uploads (2023; the cap was reported as three titles per day at that time). — [Authors Guild](https://authorsguild.org/news/amazon-adds-to-kdp-generative-ai-policy-caps-daily-self-publishing-uploads/)
+- Third-party (unverified against Amazon) reports: enforcement sweeps from April 2026 targeting titles where AI detection flags non-disclosure; anti-spam enforcement against duplicate, low-content and "AI-slop" books; activity/colouring categories flooded with AI content received targeted attention. — [Writeo](https://writeo.app/news/amazon-kdp-ai-disclosure-enforcement-2026); [Univers Studio](https://univers.studio/blog/kdp-ai-content-policy-2026/); [KDP Builder](https://kdpbuilder.com/blog/ai-book-publishing-2026)
+- Puzzle books are generally not "low-content" in KDP's definition (low-content means repetitive pages such as journals and logbooks; puzzle books need a new puzzle per page), so ticking the low-content box for them is wrong per several guides. — [Inkfluence AI](https://www.inkfluenceai.com/blog/low-content-books-kdp-2026); [Low Content Profits](https://lowcontentprofits.com/what-is-considered-a-low-content-book/); [Vappingo](https://www.vappingo.com/word-blog/low-content-books-income/)
+- Saturation commentary: "nobody wins the search term 'word search book' anymore"; advice is to target sub-niches such as "large-print word search for seniors about classic movies". — [Naomi Jane Substack](https://naomijane.substack.com/p/low-and-medium-content-books-on-amazon); [KDP Easy themes](https://www.kdpeasy.com/blog/word-search-book-themes)
+- Large-print seniors niche: described as evergreen and one of the top-performing puzzle categories; KDP Builder rates it "Low-Medium" competition, 100-120 pages at 8.5x11 in, year-round demand; a KDP Easy example says a bird-watching large-print title competes with about 180 other titles (vendor claims, no method given). — [KDP Builder seniors niches](https://kdpbuilder.com/blog/best-puzzle-book-niches-for-seniors); [KDP Easy large print seniors](https://www.kdpeasy.com/blog/large-print-word-search-seniors)
+- Royalty per copy (vendor figure, should be verified with KDP's calculator): list $7.99 nets about $0.34; $9.99 about $1.74; $11.99 about $3.14; theme-specific large-print senior variants reach $12.99-$13.99 price ceilings. Same source claims 60-80% repeat purchase in well-built series (unsourced). — [KDP Easy large print seniors](https://www.kdpeasy.com/blog/large-print-word-search-seniors)
+- Service market signal: Fiverr sellers offer to design large-print word search books "ready for Amazon KDP", indicating interiors are a commodity. — [Fiverr gig](https://fiverr.com/tlinhm/create-professional-word-search-books-ready-for-amazon-kdp)
+
+### Inferences
+- With royalties of roughly $0.30-$3 per copy and heavy competition, a single themed word search book needs sustained sales of several copies a day to matter; most new titles will not rank without Amazon Ads, which can consume the whole royalty at these price points.
+- A word list written by an LLM is "AI-generated text" under KDP's definition and must be disclosed; grid placement by algorithm is not the issue. This is a compliance point for any generator's users, and an AI tool should say so.
+- The combination of AI-flood, upload caps and enforcement sweeps raises the risk for the "publish many AI books" user that a generator tool would be sold to.
+
+### Gaps
+- No verified BSR, units or revenue for specific best-selling word search books was retrieved; a keyword tool (Publisher Rocket, Book Bolt, Titans) or direct Amazon checks would be needed.
+- Not source-verified in this pass: KDP's paperback royalty formula (60% of list less printing cost, with a lower 50% rate for lower-priced paperbacks introduced in mid-2025) and current print-cost tables; the $0.34 figure at $7.99 is consistent with a 50% rate but I did not confirm on KDP's page.
+- Official KDP low-content help page text and any current weekly/daily title limit were not retrieved from Amazon directly.
+- UK and Australia marketplace specifics not found.
+
+## B3. Word search printables on Etsy and Teachers Pay Teachers
+
+### Takeaway
+Printable word searches sell for very little: about $1-$5 for packs of 50-100 puzzles on Etsy and about $3-$13 for classroom packs on TPT, with PLR/commercial-licence bundles going for as little as about $1 on sale. No evidence of meaningful per-seller income was found.
+
+### Cited Findings
+- Etsy: a 100-puzzle "Fall Word Search Book for Adults" printable listed at $2.39 on sale; a 75-puzzle large-print word search at $3.99; 50-themed-puzzle large-print PDFs in the same range. — [Etsy listing 1806953412](https://www.etsy.com/listing/1806953412); [Etsy listing 4452104530](https://www.etsy.com/listing/4452104530)
+- Most Etsy listings are personal use only ("cannot be used for any commercial purpose"); a separate PLR niche sells bundles with "PLR / commercial use license – edit, rebrand, combine into your own products" for about $1.12 on sale. — [Etsy listing 4428251159](https://www.etsy.com/listing/4428251159); [Etsy listing 4315006703](https://www.etsy.com/listing/4315006703)
+- A third-party Etsy trends guide claims commercial-use licensing at 2-4x the personal price is common for printables, and that the "Bestseller" badge is not awarded on sales count alone (unverified vendor claims). — [InsightAgent](https://insightagent.app/guides/best-selling-printables-on-etsy)
+- TPT listing prices: a Back to School bundle of 20 word searches at $13.00 (list $30.00); a 10-puzzle no-prep classroom pack at $6.50; a 5-game set at $3.75; single themed word searches (e.g. Earth Day) sold individually and inside larger bundles. — [TPT Earth Day Word Search](https://www.teacherspayteachers.com/Product/Earth-Day-Word-Search-1838403); [TPT Digital Learning Tools Word Search](https://www.teacherspayteachers.com/Product/Digital-Learning-Tools-Word-Search-Technology-Vocabulary-Activity-Grade-3-7-14445016); [TeachShare price browse](https://www.teachshare.com/browse/vocabulary/printables/5-to-10/price_desc)
+- TES (UK/AU-facing marketplace) also carries word search bundles, e.g. an end-of-year nine-puzzle bundle. — [TES](https://www.tes.com/en-au/teaching-resource/end-of-the-year-word-search-bundle-nine-puzzles-11527664)
+- Free teacher-facing AI generators compete directly with paid printables (Education Copilot, Kuraplan, PuzzlePage, WordSearchZen). — [Education Copilot](https://educationcopilot.com/?p=546); [Kuraplan](https://kuraplan.com/tools/word-search-maker); [WordSearchZen release](https://www.newsfilecorp.com/release/303418)
+
+### Inferences
+- At $1-$5 per sale less marketplace fees, printables are a volume game dependent on listing count, seasonal themes and marketplace SEO; they suit a seller with hundreds of listings rather than a tool founder.
+- Teachers can get a curriculum-themed word search free in seconds from AI tools, which undermines paying for single puzzles; bundles tied to curriculum units and seasonal events are what still list at $6-$13.
+
+### Gaps
+- No sales volumes, top-seller names or seller income reports for word search printables on Etsy or TPT were found.
+- Etsy and TPT fee structures and TPT seller royalty rates were not retrieved in this pass.
+- Commercial-licence add-on pricing is based on one unverified guide plus individual listings.
+
+## C. B2B licensing, white-label and embeddable models
+
+### Takeaway
+Amuse Labs' PuzzleMe is the reference B2B product: public plans run free (personal), $99/month, $249/month and from $500/month for enterprise, priced by monthly game loads, with word search and "PuzzleMe AI" included on every tier. B2B buyers pay 10-50x what KDP hobbyists pay, but the incumbent already bundles AI and 15+ game types.
+
+### Cited Findings
+- PuzzleMe pricing (fetched November 2026): Personal free (1,000 game loads/month, 1 staff user, no commercial use); Plus $99/month or $90/month billed annually (2,000 loads, 2 users, commercial use, lead generation, contest mode, fonts/colours, own media); Professional $249/month or $229/month annually (5,000 loads, 4 users, 10 puzzle series, streaks, scheduled publication, custom dictionaries, custom fonts); Enterprise from $500/month (unlimited loads, 10 users, 25 series, content monitoring and review, SLA). 7-day free trials on paid plans. — [Amuse Labs pricing](https://amuselabs.com/pricing)
+- All PuzzleMe plans include unlimited puzzle creation, analytics, multiplayer, puzzle picker and "PuzzleMe AI", across all 15+ game types (word search included). Exceeding load limits does not stop games; the vendor contacts the customer about upgrading. — [Amuse Labs pricing](https://amuselabs.com/pricing)
+- A "load" is counted whenever a user opens a page with a PuzzleMe game or picker; pricing is tied to server request cost. For large publishers pricing is by quote (puzzlemaster@amuselabs.com); a 2018 brochure described a flat per-gameplay fee with a monthly minimum and no start-up cost (old). — [Amuse Labs publishers](https://amuselabs.com/solutions/publishers/); [PuzzleMe brochure 2018](https://amuselabs.com/wp-content/uploads/2018/02/PuzzleMe-Brochure.pdf)
+- Amuse Labs positions PuzzleMe as "a modern CMS for games" for publishers, sells games-based display ads for brands, offers special pricing for local news consortiums, and distributes via a WordPress plugin and a Microsoft marketplace app (Teams/Office). — [Amuse Labs publishers](https://amuselabs.com/solutions/publishers/); [Amuse Labs ads](https://amuselabs.com/?p=4430); [WordPress plugin](https://ary.wordpress.org/plugins/puzzleme/); [Microsoft Marketplace](https://marketplace.microsoft.com/en-us/product/WA200010919)
+- PuzzleMe's Plus tier explicitly sells "lead generation", confirming marketing lead-magnet use of puzzles is a paid use case. — [Amuse Labs pricing](https://amuselabs.com/pricing)
+
+### Inferences
+- The B2B price ladder ($99-$500+/month) is the only segment in this research where a single customer is worth more than about $20/month, so it is the most plausible place for a solo founder to earn, for example with a niche wedge (events, HR/onboarding, local businesses, classrooms with branding) below PuzzleMe's $99 entry point.
+- However, PuzzleMe already includes AI and word search at every tier, including a free tier, so a new entrant needs a distribution or vertical advantage rather than a feature advantage.
+
+### Gaps
+- No pricing found for newspaper print syndication of word searches (e.g. Andrews McMeel/Universal Uclick, Tribune Content Agency, King Features, PuzzleExpress, Puzzler Media, Lovatts in AU) or for other embeddable vendors (e.g. Arkadium for publishers, Puzzle Society); not researched in this pass.
+- No data on what brands pay for custom/event word searches or on agency pricing.
+- Amuse Labs customer counts and revenue not found.
