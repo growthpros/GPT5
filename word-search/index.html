@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Calm Word Search</title>
+<meta name="description" content="A calm, no-pressure word search from HumanFit AI. No timer, no ads, your theme.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Atkinson+Hyperlegible+Mono:wght@500;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+/* Layout: a puzzle-book page. Theme bar on top, letter grid on the left, word list and comfort settings on the right. */
+:root {
+  color-scheme: light;
+  --bg: #eef1f7; --surface: #ffffff; --fg: #18203a; --muted: #5b6480; --line: #d3d9e6;
+  --accent: #2743d6; --accent-fg: #ffffff;
+  --hl1: #ffe14d; --hl2: #ff9fc6; --hl3: #8ce3a6; --hl4: #ffb96b; --hl5: #8fd2ff; --live: #c3ccf5;
+  --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+  --mono: "Atkinson Hyperlegible Mono", ui-monospace, Menlo, monospace;
+  --cell-font: 0.5;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-paper]) {
+    --bg: #10141f; --surface: #191f30; --fg: #e9ecf6; --muted: #9aa3bd; --line: #2d3550;
+    --accent: #8ea2ff; --accent-fg: #10141f;
+    --hl1: #7d6a00; --hl2: #8c2f5d; --hl3: #1f7445; --hl4: #8f4f12; --hl5: #205f8e; --live: #3a4675;
+    color-scheme: dark;
+  }
+}
+/* Paper choices always use light, low-glare colours, whatever the device theme. */
+:root[data-paper="cream"] { --bg: #f3ecd8; --surface: #fbf6e8; --fg: #2b2a24; --muted: #5f5a4a; --line: #d9ceb0; --live: #e2d7b5; }
+:root[data-paper="blue"]  { --bg: #e3edf6; --surface: #f2f7fb; --fg: #1d2a38; --muted: #4f5f70; --line: #c3d3e2; --live: #c9d8ea; }
+:root[data-paper="green"] { --bg: #e4f0e6; --surface: #f3f9f3; --fg: #1f2e24; --muted: #506355; --line: #c6dcca; --live: #cfe2d3; }
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 1rem; line-height: 1.5;
+  padding-block: max(1.5rem, env(safe-area-inset-top, 0px)) 3rem;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+body.large { font-size: 1.25rem; --cell-font: 0.66; }
+.page { max-width: 62rem; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+body.large .page { max-width: 70rem; }
+
+header { display: flex; flex-direction: column; gap: 1rem; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(1.9rem, 5vw, 2.75rem); line-height: 1.05; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 40rem; }
+form { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+input[type="text"] {
+  flex: 1 1 14rem; min-width: 0; font: inherit; color: var(--fg);
+  background: var(--surface); border: 2px solid var(--line); border-radius: 0.6rem; padding: 0.7rem 0.9rem;
+}
+button { font: inherit; cursor: pointer; }
+.primary { background: var(--accent); color: var(--accent-fg); border: 0; border-radius: 0.6rem; padding: 0.7rem 1.2rem; font-weight: 700; }
+.primary:disabled { opacity: 0.6; cursor: progress; }
+.quiet { background: transparent; color: var(--fg); border: 2px solid var(--line); border-radius: 0.6rem; padding: 0.45rem 0.9rem; }
+.quiet:disabled { opacity: 0.5; cursor: default; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+.chips span { color: var(--muted); font-size: 0.9em; margin-right: 0.2rem; }
+.chip { background: var(--surface); color: var(--fg); border: 1px solid var(--line); border-radius: 99px; padding: 0.3rem 0.8rem; font-size: 0.9em; }
+:is(button, input, select, summary):focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+#status { margin: 0; min-height: 1.5em; color: var(--muted); }
+#status.warn { color: var(--fg); font-weight: 700; }
+
+main { display: grid; grid-template-columns: minmax(0, 1fr) 17rem; gap: 1.5rem; align-items: start; }
+body.large main { grid-template-columns: minmax(0, 1fr) 21rem; }
+@media (max-width: 52rem) { main, body.large main { grid-template-columns: minmax(0, 1fr); } }
+
+.board {
+  position: relative; aspect-ratio: 1; width: 100%; max-width: 38rem;
+  background: var(--surface); border: 2px solid var(--fg); border-radius: 0.5rem;
+  container-type: inline-size; touch-action: none; user-select: none; -webkit-user-select: none;
+}
+body.large .board { max-width: 46rem; }
+.board svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.cells { position: absolute; inset: 0; display: grid; }
+.cell {
+  background: none; border: 0; padding: 0; color: var(--fg);
+  font-family: var(--mono); font-weight: 700; line-height: 1;
+  font-size: calc(100cqw / var(--n) * var(--cell-font));
+  display: grid; place-items: center; border-radius: 50%;
+}
+.cell:focus-visible { outline: 2px solid var(--accent); outline-offset: -3px; }
+.cell.anchor { box-shadow: inset 0 0 0 2px var(--accent); }
+.cell.hint { animation: pulse 0.6s ease-in-out 4; }
+@keyframes pulse { 50% { background: var(--hl1); } }
+@media (prefers-reduced-motion: reduce) { .cell.hint { animation: none; background: var(--hl1); } }
+
+aside { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
+.tag { font-size: 0.8em; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+h2 { font-family: var(--display); font-weight: 600; font-size: 1.5em; line-height: 1.15; margin: 0; overflow-wrap: anywhere; }
+.count { margin: 0; font-variant-numeric: tabular-nums; }
+ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(7.5em, 1fr)); gap: 0.35rem 0.75rem; }
+li { font-family: var(--mono); font-weight: 500; font-size: 0.95em; display: flex; align-items: center; gap: 0.45rem; }
+li::before { content: ""; width: 0.7em; height: 0.7em; border-radius: 50%; border: 1.5px solid var(--line); background: var(--sw, transparent); flex: none; }
+li.found { text-decoration: line-through; color: var(--muted); }
+li.found::before { border-color: transparent; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.textlink { background: none; border: 0; padding: 0; color: var(--accent); text-decoration: underline; text-underline-offset: 3px; align-self: flex-start; }
+.how { margin: 0; color: var(--muted); font-size: 0.9em; }
+
+details.settings { background: var(--surface); border: 1px solid var(--line); border-radius: 0.6rem; padding: 0.6rem 0.9rem; }
+details.settings summary { cursor: pointer; font-weight: 700; }
+.settings-body { display: flex; flex-direction: column; gap: 0.9rem; padding-top: 0.8rem; }
+fieldset { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
+legend { font-size: 0.85em; color: var(--muted); padding: 0; margin-bottom: 0.25rem; }
+.seg { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.seg label { position: relative; }
+.seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.seg span { display: inline-block; border: 1.5px solid var(--line); border-radius: 0.5rem; padding: 0.3rem 0.65rem; font-size: 0.9em; background: var(--bg); }
+.seg input:checked + span { border-color: var(--accent); background: var(--accent); color: var(--accent-fg); }
+.seg input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+footer { max-width: 62rem; margin: 2rem auto 0; color: var(--muted); font-size: 0.9em; }
+
+/* Printing: only the print sheet shows. Page 1 is the puzzle, page 2 the answer key. */
+#printSheet { display: none; }
+@media print {
+  @page { margin: 0.5in; }
+  body { background: #fff; color: #000; padding: 0; font-size: 14pt; }
+  .page, footer { display: none !important; }
+  #printSheet { display: block; }
+  .ps-page { page-break-after: always; break-after: page; }
+  .ps-page:last-child { page-break-after: auto; break-after: auto; }
+  .ps-page h1 { font-family: var(--display); font-size: 24pt; margin: 0 0 0.05in; }
+  .ps-page .ps-sub { margin: 0 0 0.2in; font-size: 12pt; color: #333; }
+  .ps-grid { border-collapse: collapse; margin: 0 auto 0.2in; }
+  .ps-grid td { text-align: center; vertical-align: middle; font-family: var(--mono); font-weight: 700; color: #000; padding: 0; }
+  .ps-grid td.off { color: #b5b5b5; font-weight: 500; }
+  .ps-grid td.on { outline: 1.5pt solid #000; outline-offset: -2pt; border-radius: 30%; }
+  .ps-words { display: grid !important; grid-template-columns: repeat(4, 1fr); gap: 0.04in 0.3in; font-family: var(--mono); font-size: 13pt; line-height: 1.4; list-style: none; padding: 0; margin: 0; break-inside: avoid; }
+  .ps-words li { display: block; font-size: inherit; }
+  .ps-words li::before { content: none; }
+  .ps-foot { margin-top: 0.15in; font-size: 9pt; color: #555; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>Calm Word Search</h1>
+    <p class="lede" id="lede">Type any theme and get a fresh puzzle. No timer, no ads, no sign-up.</p>
+    <form id="themeForm">
+      <label class="sr" for="themeInput">Puzzle theme</label>
+      <input type="text" id="themeInput" maxlength="60" autocomplete="off" placeholder="Try: Charleston, 1950s music, baking, birds">
+      <button class="primary" id="makeBtn" type="submit">Make my puzzle</button>
+    </form>
+    <div class="chips" id="chips"><span>Ready-made themes:</span></div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </header>
+
+  <main>
+    <div class="board" id="board">
+      <svg id="marks" aria-hidden="true"></svg>
+      <div class="cells" id="cells" role="grid" aria-label="Word search letters"></div>
+    </div>
+    <aside>
+      <div>
+        <p class="tag" id="tag">Example puzzle</p>
+        <h2 id="themeName">Ocean</h2>
+      </div>
+      <p class="count" id="count"></p>
+      <ul id="wordList"></ul>
+      <div class="actions">
+        <button class="quiet" id="hintBtn" type="button">Show me a first letter</button>
+        <button class="quiet" id="shuffleBtn" type="button">Shuffle this puzzle</button>
+      </div>
+      <button class="textlink" id="printBtn" type="button">Print this puzzle (with answer key)</button>
+      <p class="how">Drag across a word, or tap its first letter and then its last. Words can be picked from either end.</p>
+
+      <details class="settings" id="settings">
+        <summary>Comfort settings</summary>
+        <div class="settings-body">
+          <fieldset>
+            <legend>Letter size</legend>
+            <div class="seg">
+              <label><input type="radio" name="size" value="standard" id="size-standard"><span>Standard</span></label>
+              <label><input type="radio" name="size" value="large" id="size-large"><span>Large print</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Paper</legend>
+            <div class="seg">
+              <label><input type="radio" name="paper" value="default" id="paper-default"><span>Plain</span></label>
+              <label><input type="radio" name="paper" value="cream" id="paper-cream"><span>Cream</span></label>
+              <label><input type="radio" name="paper" value="blue" id="paper-blue"><span>Soft blue</span></label>
+              <label><input type="radio" name="paper" value="green" id="paper-green"><span>Soft green</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>How many words (changes the puzzle)</legend>
+            <div class="seg">
+              <label><input type="radio" name="count" value="8" id="count-8"><span>8, lighter</span></label>
+              <label><input type="radio" name="count" value="12" id="count-12"><span>12</span></label>
+              <label><input type="radio" name="count" value="16" id="count-16"><span>16, fuller</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Word directions (changes the puzzle)</legend>
+            <div class="seg">
+              <label><input type="radio" name="diag" value="no" id="diag-no"><span>Across and down only</span></label>
+              <label><input type="radio" name="diag" value="yes" id="diag-yes"><span>Also diagonal</span></label>
+            </div>
+          </fieldset>
+          <p class="how">Words never run backwards.</p>
+        </div>
+      </details>
+    </aside>
+  </main>
+</div>
+<footer>A calm word search from HumanFit AI.</footer>
+<div id="printSheet" aria-hidden="true"></div>
+
+<script>
+(function () {
+  var SIZES = { 8: 11, 12: 13, 16: 15 };   // words -> grid size
+  var BUILT_IN = {
+    "Ocean": ["CORAL","DOLPHIN","SEAWEED","TIDE","WHALE","ANCHOR","LAGOON","OCTOPUS","SHELL","CURRENT","HARBOR","JELLYFISH","PELICAN","SURF","STARFISH","REEF"],
+    "Space": ["COMET","GALAXY","ORBIT","PLANET","ROCKET","NEBULA","ASTEROID","ECLIPSE","METEOR","SATURN","GRAVITY","TELESCOPE","LUNAR","COSMOS","SHUTTLE","CRATER"],
+    "Kitchen": ["WHISK","SPATULA","SKILLET","OVEN","COLANDER","LADLE","GRATER","APRON","BLENDER","TOASTER","KETTLE","PANTRY","RECIPE","SIMMER","PEELER","TONGS"],
+    "Garden": ["TROWEL","COMPOST","SEEDLING","BLOSSOM","TRELLIS","MULCH","PETAL","SPROUT","HARVEST","TULIP","LAVENDER","WEEDS","ROOTS","SHOVEL","POLLEN","FERN"],
+    "Weather": ["THUNDER","DRIZZLE","BREEZE","FORECAST","HUMIDITY","RAINBOW","BLIZZARD","SUNSHINE","TORNADO","FROST","CLOUDY","HAIL","LIGHTNING","MONSOON","GUST","FOGGY"],
+    "Music": ["MELODY","RHYTHM","CHORUS","GUITAR","TEMPO","HARMONY","DRUMS","PIANO","LYRICS","CONCERT","VIOLIN","ENCORE","BALLAD","TRUMPET","ACOUSTIC","VINYL"],
+    "The 1950s": ["JUKEBOX","DINER","POODLE","MILKSHAKE","HULAHOOP","DRIVEIN","SOCKHOP","RADIO","TELEVISION","SODA","CADILLAC","PETTICOAT","RECORD","BOBBYSOX","MALTSHOP","ROCKABILLY"]
+  };
+  // Starter list of words that must not appear by accident in the filler letters.
+  var BAD = atob("QVNTLEFSU0UsQlVUVCxDUkFQLERBTU4sSEVMTCxQSVNTLFBPT1AsU0hJVCxGVUNLLEZVSyxDVU5ULENPQ0ssRElDSyxESUssUEVOSVMsVkFHSU5BLEJPT0IsVElULFRJVFMsVFdBVCxTTFVULFdIT1JFLEhPRSxGQUcsRFlLRSxOQVpJLFJBUEUsUE9STixTRVgsU0VYWSxOVURFLENVTSxKSVpaLFdBTkssUFJJQ0ssQklUQ0gsQkFTVEFSRCxCT0xMT0NLLEtJTEwsRElFLERFQUQsR1VOLERSVUcsTUVUSCxXRUVELFBVU1NZLE5JR0dFUixOSUdHQSxTUElDLEtJS0UsQ0hJTkssUkVUQVJELEhPTU8sQU5BTCxBTlVTLE9SR0FTTSxESUxETyxIT1JOWQ==").split(",");
+  var ALL8 = [[0,1],[1,0],[1,1],[-1,1],[0,-1],[-1,0],[-1,-1],[1,-1]];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var cellsEl = $("cells"), marks = $("marks"), statusEl = $("status"), board = $("board");
+  var state = null, anchor = null, drag = null, cellEls = [];
+
+  // ---------- Comfort settings, remembered on this device ----------
+  var prefs = { size: "standard", paper: "default", count: "12", diag: "yes" };
+  try { var saved = JSON.parse(localStorage.getItem("cws-prefs") || "null"); if (saved) for (var k in prefs) if (saved[k]) prefs[k] = saved[k]; } catch (e) {}
+  function savePrefs() { try { localStorage.setItem("cws-prefs", JSON.stringify(prefs)); } catch (e) {} }
+  function applyLook() {
+    document.body.classList.toggle("large", prefs.size === "large");
+    if (prefs.paper === "default") document.documentElement.removeAttribute("data-paper");
+    else document.documentElement.setAttribute("data-paper", prefs.paper);
+  }
+  ["size", "paper", "count", "diag"].forEach(function (name) {
+    var el = $(name + "-" + prefs[name]); if (el) el.checked = true;
+    document.querySelectorAll('input[name="' + name + '"]').forEach(function (input) {
+      input.addEventListener("change", function () {
+        prefs[name] = input.value; savePrefs(); applyLook();
+        if ((name === "count" || name === "diag") && state) {
+          newPuzzle(state.theme, state.tag, state.pool);
+          say(name === "count" ? "New puzzle with " + prefs.count + " words." : (prefs.diag === "yes" ? "New puzzle, diagonals included." : "New puzzle, across and down only."));
+        }
+      });
+    });
+  });
+  applyLook();
+
+  // ---------- Puzzle building ----------
+  function rand(n) { return Math.floor(Math.random() * n); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = rand(i + 1), t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function dirs() { return prefs.diag === "yes" ? [[0,1],[1,0],[1,1],[-1,1]] : [[0,1],[1,0]]; }
+
+  function placeWords(words, N) {
+    var grid = [], placed = [], D = dirs();
+    for (var r = 0; r < N; r++) grid.push(new Array(N).fill(null));
+    words.slice().sort(function (a, b) { return b.length - a.length; }).forEach(function (w) {
+      if (w.length > N) return;
+      for (var t = 0; t < 500; t++) {
+        var d = D[rand(D.length)], L = w.length;
+        var r0 = d[0] === 1 ? rand(N - L + 1) : d[0] === -1 ? L - 1 + rand(N - L + 1) : rand(N);
+        var c0 = d[1] === 1 ? rand(N - L + 1) : rand(N);
+        var ok = true;
+        for (var i = 0; i < L && ok; i++) { var ch = grid[r0 + d[0] * i][c0 + d[1] * i]; ok = ch === null || ch === w[i]; }
+        if (!ok) continue;
+        for (i = 0; i < L; i++) grid[r0 + d[0] * i][c0 + d[1] * i] = w[i];
+        placed.push({ word: w, r: r0, c: c0, dr: d[0], dc: d[1] });
+        return;
+      }
+    });
+    return { grid: grid, placed: placed };
+  }
+
+  // Finds a blocked word anywhere in the grid that uses at least one filler letter.
+  function hasAccidentalBadWord(grid, isWord, N) {
+    for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) for (var d = 0; d < 8; d++) {
+      var dr = ALL8[d][0], dc = ALL8[d][1];
+      for (var b = 0; b < BAD.length; b++) {
+        var w = BAD[b], L = w.length, er = r + dr * (L - 1), ec = c + dc * (L - 1);
+        if (er < 0 || er >= N || ec < 0 || ec >= N) continue;
+        var match = true, usesFiller = false;
+        for (var i = 0; i < L && match; i++) {
+          var rr = r + dr * i, cc = c + dc * i;
+          match = grid[rr][cc] === w[i];
+          if (!isWord[rr][cc]) usesFiller = true;
+        }
+        if (match && usesFiller) return true;
+      }
+    }
+    return false;
+  }
+
+  function fillGrid(grid, N) {
+    var isWord = grid.map(function (row) { return row.map(function (ch) { return ch !== null; }); });
+    for (var attempt = 0; attempt < 300; attempt++) {
+      for (var r = 0; r < N; r++) for (var c = 0; c < N; c++) if (!isWord[r][c]) grid[r][c] = String.fromCharCode(65 + rand(26));
+      if (!hasAccidentalBadWord(grid, isWord, N)) return;
+    }
+  }
+
+  function newPuzzle(theme, tag, pool) {
+    var count = +prefs.count, N = SIZES[count] || 13;
+    var built = placeWords(shuffle(pool).slice(0, count), N);
+    fillGrid(built.grid, N);
+    state = {
+      theme: theme, tag: tag, pool: pool, N: N, grid: built.grid, starts: built.placed,
+      words: built.placed.map(function (p) { return p.word; }).sort(), found: []
+    };
+    anchor = null; drag = null;
+    render();
+  }
+
+  // ---------- Drawing ----------
+  function render() {
+    var N = state.N;
+    board.style.setProperty("--n", N);
+    cellsEl.style.gridTemplateColumns = "repeat(" + N + ", 1fr)";
+    cellsEl.style.gridTemplateRows = "repeat(" + N + ", 1fr)";
+    marks.setAttribute("viewBox", "0 0 " + N + " " + N);
+    cellsEl.setAttribute("aria-label", "Word search letters, " + N + " by " + N);
+    $("themeName").textContent = state.theme;
+    $("tag").textContent = state.tag;
+    cellsEl.textContent = ""; cellEls = [];
+    for (var r = 0; r < N; r++) {
+      var row = [];
+      for (var c = 0; c < N; c++) {
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "cell"; b.textContent = state.grid[r][c];
+        b.dataset.r = r; b.dataset.c = c; b.tabIndex = (r === 0 && c === 0) ? 0 : -1;
+        b.setAttribute("aria-label", state.grid[r][c] + ", row " + (r + 1) + ", column " + (c + 1));
+        cellsEl.appendChild(b); row.push(b);
+      }
+      cellEls.push(row);
+    }
+    renderWords(); drawMarks();
+  }
+
+  function renderWords() {
+    var ul = $("wordList"); ul.textContent = "";
+    state.words.forEach(function (w) {
+      var li = document.createElement("li"); li.textContent = w;
+      var f = state.found.filter(function (x) { return x.word === w; })[0];
+      if (f) { li.className = "found"; li.style.setProperty("--sw", "var(--hl" + f.color + ")"); }
+      ul.appendChild(li);
+    });
+    var n = state.found.length, total = state.words.length;
+    $("count").textContent = n === total ? "All " + total + " found. Nicely done!" : n + " of " + total + " found";
+    $("hintBtn").disabled = n === total;
+  }
+
+  function line(a, b, color) {
+    var l = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    l.setAttribute("x1", a.c + 0.5); l.setAttribute("y1", a.r + 0.5);
+    l.setAttribute("x2", b.c + 0.5); l.setAttribute("y2", b.r + 0.5);
+    l.setAttribute("stroke", color); l.setAttribute("stroke-width", 0.74); l.setAttribute("stroke-linecap", "round");
+    marks.appendChild(l);
+  }
+  function aligned(a, b) { var dr = b.r - a.r, dc = b.c - a.c; return dr === 0 || dc === 0 || Math.abs(dr) === Math.abs(dc); }
+  function drawMarks() {
+    marks.textContent = "";
+    state.found.forEach(function (f) { line({ r: f.r1, c: f.c1 }, { r: f.r2, c: f.c2 }, "var(--hl" + f.color + ")"); });
+    if (drag) line(drag.start, aligned(drag.start, drag.end) ? drag.end : drag.start, "var(--live)");
+    cellEls.forEach(function (row, r) { row.forEach(function (el, c) { el.classList.toggle("anchor", !!anchor && anchor.r === r && anchor.c === c); }); });
+  }
+  function say(msg, warn) { statusEl.textContent = msg; statusEl.className = warn ? "warn" : ""; }
+
+  // ---------- Playing ----------
+  function attempt(a, b) {
+    if (!aligned(a, b)) { say("Words run in a straight line: across, down" + (prefs.diag === "yes" ? ", or diagonal." : ".")); return; }
+    var dr = Math.sign(b.r - a.r), dc = Math.sign(b.c - a.c), len = Math.max(Math.abs(b.r - a.r), Math.abs(b.c - a.c)) + 1, s = "";
+    for (var i = 0; i < len; i++) s += state.grid[a.r + dr * i][a.c + dc * i];
+    var rev = s.split("").reverse().join("");
+    var isFound = function (w) { return state.found.some(function (f) { return f.word === w; }); };
+    var hit = state.words.filter(function (w) { return (w === s || w === rev) && !isFound(w); })[0];
+    if (!hit) { say(state.words.indexOf(s) !== -1 || state.words.indexOf(rev) !== -1 ? "You already found that one." : "Not on the list. Keep looking, you're close."); return; }
+    state.found.push({ word: hit, r1: a.r, c1: a.c, r2: b.r, c2: b.c, color: (state.found.length % 5) + 1 });
+    renderWords();
+    say(state.found.length === state.words.length ? "That's every word. Want another? Type a new theme or shuffle this one." : "Found " + hit + ".");
+  }
+  function cellFromEl(el) { return el && el.classList && el.classList.contains("cell") ? { r: +el.dataset.r, c: +el.dataset.c } : null; }
+  function same(a, b) { return a && b && a.r === b.r && a.c === b.c; }
+  function tap(cell) {
+    if (anchor && !same(anchor, cell)) { attempt(anchor, cell); anchor = null; }
+    else anchor = same(anchor, cell) ? null : cell;
+    drawMarks();
+  }
+  board.addEventListener("pointerdown", function (e) {
+    var cell = cellFromEl(e.target); if (!cell) return;
+    if (anchor && !same(anchor, cell)) { attempt(anchor, cell); anchor = null; drawMarks(); return; }
+    drag = { start: cell, end: cell }; drawMarks();
+  });
+  window.addEventListener("pointermove", function (e) {
+    if (!drag) return;
+    var cell = cellFromEl(document.elementFromPoint(e.clientX, e.clientY));
+    if (cell && !same(cell, drag.end)) { drag.end = cell; drawMarks(); }
+  });
+  window.addEventListener("pointerup", function () {
+    if (!drag) return;
+    var d = drag; drag = null;
+    if (same(d.start, d.end)) anchor = same(anchor, d.start) ? null : d.start;
+    else { attempt(d.start, d.end); anchor = null; }
+    drawMarks();
+  });
+  window.addEventListener("pointercancel", function () { drag = null; drawMarks(); });
+  cellsEl.addEventListener("keydown", function (e) {
+    var cell = cellFromEl(e.target); if (!cell) return;
+    var move = { ArrowUp: [-1, 0], ArrowDown: [1, 0], ArrowLeft: [0, -1], ArrowRight: [0, 1] }[e.key];
+    if (move) {
+      e.preventDefault();
+      var N = state.N, r = Math.min(N - 1, Math.max(0, cell.r + move[0])), c = Math.min(N - 1, Math.max(0, cell.c + move[1]));
+      e.target.tabIndex = -1; cellEls[r][c].tabIndex = 0; cellEls[r][c].focus();
+    } else if (e.key === "Enter" || e.key === " ") { e.preventDefault(); tap(cell); }
+  });
+
+  $("hintBtn").addEventListener("click", function () {
+    var left = state.starts.filter(function (p) { return !state.found.some(function (f) { return f.word === p.word; }); });
+    if (!left.length) return;
+    var p = left[rand(left.length)], el = cellEls[p.r][p.c];
+    el.classList.remove("hint"); void el.offsetWidth; el.classList.add("hint");
+    setTimeout(function () { el.classList.remove("hint"); }, 2600);
+    say(p.word + " starts at the flashing letter.");
+  });
+  $("shuffleBtn").addEventListener("click", function () { newPuzzle(state.theme, state.tag, state.pool); say("Same theme, new layout."); });
+
+  // ---------- Printing: puzzle page plus answer key ----------
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (ch) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[ch]; }); }
+  function buildPrintSheet() {
+    var N = state.N, gridIn = 6.6, cellIn = (gridIn / N).toFixed(3), fontPt = Math.round(gridIn / N * 72 * 0.56);
+    var answer = {};
+    state.starts.forEach(function (p) { for (var i = 0; i < p.word.length; i++) answer[(p.r + p.dr * i) + "," + (p.c + p.dc * i)] = true; });
+    function grid(key) {
+      var html = '<table class="ps-grid">';
+      for (var r = 0; r < N; r++) {
+        html += "<tr>";
+        for (var c = 0; c < N; c++) {
+          var cls = key ? (answer[r + "," + c] ? "on" : "off") : "";
+          html += '<td class="' + cls + '" style="width:' + cellIn + "in;height:" + cellIn + "in;font-size:" + fontPt + 'pt">' + state.grid[r][c] + "</td>";
+        }
+        html += "</tr>";
+      }
+      return html + "</table>";
+    }
+    var words = "<ul class=\"ps-words\">" + state.words.map(function (w) { return "<li>" + w + "</li>"; }).join("") + "</ul>";
+    var dirsText = prefs.diag === "yes" ? "Words run across, down or diagonally. None run backwards." : "Words run across or down. None run backwards.";
+    $("printSheet").innerHTML =
+      '<section class="ps-page"><h1>' + esc(state.theme) + '</h1><p class="ps-sub">Find ' + state.words.length + " words. " + dirsText + "</p>" + grid(false) + words +
+      '<p class="ps-foot">A calm word search from HumanFit AI</p></section>' +
+      '<section class="ps-page"><h1>' + esc(state.theme) + ': answer key</h1><p class="ps-sub">Letters in boxes belong to the hidden words.</p>' + grid(true) + words + "</section>";
+  }
+  $("printBtn").addEventListener("click", function () { buildPrintSheet(); window.print(); });
+  window.addEventListener("beforeprint", buildPrintSheet);
+
+  // ---------- Themes ----------
+  Object.keys(BUILT_IN).forEach(function (name) {
+    var b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.textContent = name;
+    b.addEventListener("click", function () { newPuzzle(name, "Ready-made theme", BUILT_IN[name]); say(""); });
+    $("chips").appendChild(b);
+  });
+  function builtInFor(theme) {
+    var t = theme.toLowerCase();
+    return Object.keys(BUILT_IN).filter(function (k) { return t.indexOf(k.toLowerCase()) !== -1; })[0];
+  }
+
+  $("themeForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var theme = $("themeInput").value.trim().replace(/\s+/g, " ");
+    if (!theme) { say("Type a theme first. Anything works: a hobby, a place, a decade.", true); $("themeInput").focus(); return; }
+    var btn = $("makeBtn"); btn.disabled = true;
+    say("Thinking up words for “" + theme + "”…");
+    var problem = "That didn't work this time. Try again, or pick a ready-made theme.";
+    try {
+      var resp = await fetch("/api/words", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ theme: theme }) });
+      var data = await resp.json().catch(function () { return {}; });
+      if (resp.ok && data.words && data.words.length >= 8) {
+        newPuzzle(theme, "Your theme", data.words);
+        say("Here's your puzzle. Take your time.");
+        btn.disabled = false; return;
+      }
+      if (data.error) problem = data.error;
+    } catch (err) {}
+    var fallback = builtInFor(theme);
+    if (fallback && resp && resp.status !== 422) { newPuzzle(fallback, "Ready-made theme", BUILT_IN[fallback]); say("Here's the ready-made " + fallback + " puzzle."); }
+    else say(problem, true);
+    btn.disabled = false;
+  });
+
+  newPuzzle("Ocean", "Example puzzle", BUILT_IN.Ocean);
+})();
+</script>
+</body>
+</html>
